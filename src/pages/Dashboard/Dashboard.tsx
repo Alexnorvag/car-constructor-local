@@ -1,4 +1,5 @@
-import React, { FC, useState, MouseEvent } from "react";
+import { FC } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,9 +8,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -18,41 +16,30 @@ const useStyles = makeStyles({
 });
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
+  projectName: string,
+  status: string,
+  nextReview: string,
+  milestones: string,
+  delivery: string
 ) {
-  return { name, calories, fat, carbs, protein };
+  return { projectName, status, nextReview, milestones, delivery };
 }
+
 const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Kona OS RTE", "DATA", "01/25/21", "0/7", "03/15/21"),
+  createData("Sante Fe TDI", "REVIEW", "01/07/21", "3/5", "02/01/21"),
+  createData("Kona OS Reveal", "PRODUCTION", "01/08/21", "3/4", "02/15/21"),
+  createData("Kona EV RTE", "GARAGING", "01/31/21", "2/7", "04/01/21"),
+  createData("Sonata NLine Wheel Cap", "DATA", "02/20/21", "0/4", "03/15/21"),
+  createData("Nexo Hydrogen Decal", "DATA", "01/18/21", "0/4", "03/15/21"),
+  createData("MY22 Hyundai Packshots", "DATA", "02/12/21", "0/7", "03/15/21"),
 ];
 
 export const Dashboard: FC = () => {
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleClick = (event: MouseEvent<HTMLTableHeaderCellElement>) => {
-    console.log("event.currentTarget: ", event.currentTarget);
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <div style={{ color: "red" }}>
-      <Button variant="contained" color="primary">
-        Check Menu
-      </Button>
       <TableContainer component={Paper}>
         <Table
           className={classes.table}
@@ -61,44 +48,25 @@ export const Dashboard: FC = () => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell align="right">PROJECT NAME</TableCell>
+              <TableCell align="right">STATUS</TableCell>
+              <TableCell align="right">NEXT REVIEW</TableCell>
+              <TableCell align="right">MILESTONES</TableCell>
+              <TableCell align="right">DELIVERY</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row" onClick={handleClick}>
-                  {row.name}
+              <TableRow key={row.projectName}>
+                <TableCell component="th" scope="row">
+                  {row.projectName}
                 </TableCell>
-                <TableCell align="right" onClick={handleClick}>
-                  {row.calories}
-                </TableCell>
-                <TableCell align="right" onClick={handleClick}>
-                  {row.fat}
-                </TableCell>
-                <TableCell align="right" onClick={handleClick}>
-                  {row.carbs}
-                </TableCell>
-                <TableCell align="right" onClick={handleClick}>
-                  {row.protein}
-                </TableCell>
+                <TableCell align="right">{row.status}</TableCell>
+                <TableCell align="right">{row.nextReview}</TableCell>
+                <TableCell align="right">{row.milestones}</TableCell>
+                <TableCell align="right">{row.delivery}</TableCell>
               </TableRow>
             ))}
-            <Menu
-              id="card-actions-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={() => console.log("some action")}>
-                Open
-              </MenuItem>
-            </Menu>
           </TableBody>
         </Table>
       </TableContainer>
