@@ -33,7 +33,14 @@ const rows = [
   createData("Nexo Hydrogen Decal", "DATA", "01/18/21", "0/4", "03/15/21"),
   createData("MY22 Hyundai Packshots", "DATA", "02/12/21", "0/7", "03/15/21"),
 ];
-
+function createData1(model: string, status: string) {
+  return { model, status };
+}
+const rows1 = [
+  createData1("MY21 Elantra", "150% Model"),
+  createData1("MY21 Santa Fe", "Garaging"),
+  createData1("MY21 Tuscon", "Garaging"),
+];
 export const Dashboard: FC = () => {
   const classes = useStyles();
 
@@ -57,13 +64,37 @@ export const Dashboard: FC = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.projectName}>
-                <TableCell component="th" scope="row">
+                <TableCell align="right" component="th" scope="row">
                   {row.projectName}
                 </TableCell>
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right">{row.nextReview}</TableCell>
                 <TableCell align="right">{row.milestones}</TableCell>
                 <TableCell align="right">{row.delivery}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TableContainer component={Paper}>
+        <Table
+          className={classes.table}
+          size="small"
+          aria-label="a dense table"
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">MODEL</TableCell>
+              <TableCell align="right">STATUS</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows1.map((row) => (
+              <TableRow key={row.model}>
+                <TableCell align="right" component="th" scope="row">
+                  {row.model}
+                </TableCell>
+                <TableCell align="right">{row.status}</TableCell>
               </TableRow>
             ))}
           </TableBody>
