@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "transparent",
     },
     table: {
-      minWidth: 650,
+      // minWidth: 650,
     },
     tableHead: {
       border: "2px solid #929497",
@@ -66,14 +66,18 @@ const useStyles = makeStyles((theme: Theme) =>
         background: "#004EFD4B !important",
       },
     },
-    root: {
+    title: {
       flexGrow: 1,
     },
+    root: {
+      flexGrow: 1,
+      // gap: '60px',
+    },
     projectsTable: {
-      minWidth: 550,
+      // minWidth: 550,
     },
     detailsTable: {
-      minWidth: 250,
+      // minWidth: 250,
     },
   })
 );
@@ -87,7 +91,6 @@ function createProjectsData(
 ) {
   return { projectName, status, nextReview, milestones, delivery };
 }
-
 const projectsData = [
   createProjectsData(
     "Kona OS RTE",
@@ -147,6 +150,7 @@ const detailsData = [
   createDetailsData("MY21 Santa Fe", "Garaging"),
   createDetailsData("MY21 Tuscon", "Garaging"),
 ];
+
 export const Dashboard: FC = () => {
   const classes = useStyles();
   const [pageSize] = useState<number>(13);
@@ -325,6 +329,7 @@ export const Dashboard: FC = () => {
           </Table>
         </TableContainer>
       </Grid>
+
       <Grid item xs={12} md={4}>
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table
