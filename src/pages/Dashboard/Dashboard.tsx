@@ -290,17 +290,28 @@ export const Dashboard: FC = () => {
             >
               <TableHead className={classes.tableHead}>
                 <TableRow>
-                  <TableCell className={classes.tableHeadCell} align="left">MODEL</TableCell>
-                  <TableCell className={classes.tableHeadCell} align="right">STATUS</TableCell>
+                  <TableCell className={classes.tableHeadCell} align="left">
+                    MODEL
+                  </TableCell>
+                  <TableCell className={classes.tableHeadCell} align="right">
+                    STATUS
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {detailsData.map((row) => (
-                  <TableRow key={row.model}>
-                    <TableCell  className={classes.tableCell} align="left" component="th" scope="row">
+                  <TableRow hover className={classes.tableRow} key={row.model}>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="left"
+                      component="th"
+                      scope="row"
+                    >
                       {row.model}
                     </TableCell>
-                    <TableCell  className={classes.tableCell} align="right">{row.status}</TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.status}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
