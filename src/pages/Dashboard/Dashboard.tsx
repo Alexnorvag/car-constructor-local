@@ -282,25 +282,25 @@ export const Dashboard: FC = () => {
           </TableContainer>
         </Grid>
         <Grid item xs={12} md={4}>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} className={classes.tableContainer}>
             <Table
               className={classes.detailsTable}
               size="small"
               aria-label="a dense table"
             >
-              <TableHead>
+              <TableHead className={classes.tableHead}>
                 <TableRow>
-                  <TableCell align="left">MODEL</TableCell>
-                  <TableCell align="right">STATUS</TableCell>
+                  <TableCell className={classes.tableHeadCell} align="left">MODEL</TableCell>
+                  <TableCell className={classes.tableHeadCell} align="right">STATUS</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {detailsData.map((row) => (
                   <TableRow key={row.model}>
-                    <TableCell align="left" component="th" scope="row">
+                    <TableCell  className={classes.tableCell} align="left" component="th" scope="row">
                       {row.model}
                     </TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell  className={classes.tableCell} align="right">{row.status}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
