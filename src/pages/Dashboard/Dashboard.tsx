@@ -1,6 +1,7 @@
-import React, { FC, useState, MouseEvent } from "react";
+import React, { FC, useState, MouseEvent, ReactElement } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Box,
   createStyles,
   Grid,
   Menu,
@@ -32,11 +33,14 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "16px",
       textTransform: "uppercase",
       lineHeight: "28px",
+      whiteSpace: "nowrap",
     },
     tableCell: {
       color: "#fff",
       fontSize: "16px",
       lineHeight: "28px",
+      height: "30px",
+      whiteSpace: "nowrap",
     },
     menuContainer: {
       background: "#929497",
@@ -145,11 +149,11 @@ const detailsData = [
 ];
 export const Dashboard: FC = () => {
   const classes = useStyles();
+  const [pageSize] = useState<number>(13);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: MouseEvent<HTMLTableHeaderCellElement>) => {
-    console.log("event.currentTarget: ", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -157,193 +161,208 @@ export const Dashboard: FC = () => {
     setAnchorEl(null);
   };
 
+  const createEmptyRow = <T,>(row: T, index: number) => (
+    <TableRow key={index} hover className={classes.tableRow}>
+      {Object.keys(row).map((_, i) => (
+        <TableCell key={i} className={classes.tableCell}>
+          <Box component="span">&nbsp;</Box>
+        </TableCell>
+      ))}
+    </TableRow>
+  );
+
+  const getEmptyRow = <T,>(data: T[], pageSize: number): ReactElement[] =>
+    [...new Array(pageSize - data.length)].map((_, idx) =>
+      createEmptyRow<T>(data[0], idx)
+    );
+
   return (
-    <div style={{ color: "red" }}>
-      <Grid container className={classes.root} spacing={5}>
-        <Grid item xs={12} md={8}>
-          <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table
-              className={classes.projectsTable}
-              size="small"
-              aria-label="a dense table"
-            >
-              <TableHead className={classes.tableHead}>
-                <TableRow>
-                  <TableCell className={classes.tableHeadCell} align="left">
-                    PROJECT NAME
-                  </TableCell>
-                  <TableCell className={classes.tableHeadCell} align="left">
-                    STATUS
-                  </TableCell>
-                  <TableCell className={classes.tableHeadCell} align="right">
-                    NEXT REVIEW
-                  </TableCell>
-                  <TableCell className={classes.tableHeadCell} align="right">
-                    MILESTONES
-                  </TableCell>
-                  <TableCell className={classes.tableHeadCell} align="right">
-                    DELIVERY
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {projectsData.map((row) => (
-                  <TableRow
-                    key={row.projectName}
-                    hover
-                    className={classes.tableRow}
-                  >
-                    <TableCell
-                      className={classes.tableCell}
-                      align="left"
-                      component="th"
-                      scope="row"
-                      onClick={handleClick}
-                    >
-                      {row.projectName}
-                    </TableCell>
-                    <TableCell
-                      className={classes.tableCell}
-                      align="left"
-                      onClick={handleClick}
-                    >
-                      {row.status}
-                    </TableCell>
-                    <TableCell
-                      className={classes.tableCell}
-                      align="center"
-                      onClick={handleClick}
-                    >
-                      {row.nextReview}
-                    </TableCell>
-                    <TableCell
-                      className={clsx(
-                        classes.tableCell,
-                        row.milestones.current && classes.textBlue
-                      )}
-                      align="center"
-                      onClick={handleClick}
-                    >
-                      {row.milestones.current}/{row.milestones.amount}
-                    </TableCell>
-                    <TableCell
-                      className={classes.tableCell}
-                      align="center"
-                      onClick={handleClick}
-                    >
-                      {row.delivery}
-                    </TableCell>
-                  </TableRow>
-                ))}
-                <Menu
-                  classes={{
-                    paper: classes.menuContainer, // class name, e.g. `classes-nesting-root-x`
-                    list: classes.menuList,
-                  }}
-                  id="card-actions-menu"
-                  anchorEl={anchorEl}
-                  getContentAnchorEl={null}
-                  anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                  transformOrigin={{ vertical: "top", horizontal: "center" }}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
+    <Grid container className={classes.root} spacing={6}>
+      <Grid item xs={12} md={8}>
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table
+            className={classes.projectsTable}
+            size="small"
+            aria-label="a dense table"
+          >
+            <TableHead className={classes.tableHead}>
+              <TableRow>
+                <TableCell className={classes.tableHeadCell} align="left">
+                  PROJECT NAME
+                </TableCell>
+                <TableCell className={classes.tableHeadCell} align="left">
+                  STATUS
+                </TableCell>
+                <TableCell className={classes.tableHeadCell} align="right">
+                  NEXT REVIEW
+                </TableCell>
+                <TableCell className={classes.tableHeadCell} align="right">
+                  MILESTONES
+                </TableCell>
+                <TableCell className={classes.tableHeadCell} align="right">
+                  DELIVERY
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {projectsData.map((row) => (
+                <TableRow
+                  key={row.projectName}
+                  hover
+                  className={classes.tableRow}
                 >
-                  <MenuItem
-                    classes={{
-                      root: classes.menuItem,
-                    }}
-                    disableGutters
-                    onClick={() => {
-                      // TODO: change to real handlers
-                      console.log("Open action");
-                      handleClose();
-                    }}
+                  <TableCell
+                    className={classes.tableCell}
+                    align="left"
+                    component="th"
+                    scope="row"
+                    onClick={handleClick}
                   >
-                    Open
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.menuItem,
-                    }}
-                    disableGutters
-                    onClick={() => {
-                      // TODO: change to real handlers
-                      console.log("Edit action");
-                      handleClose();
-                    }}
-                  >
-                    Edit
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.menuItem,
-                    }}
-                    disableGutters
-                    onClick={() => {
-                      // TODO: change to real handlers
-                      console.log("Duplicate action");
-                      handleClose();
-                    }}
-                  >
-                    Duplicate
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.menuItem,
-                    }}
-                    disableGutters
-                    onClick={() => {
-                      // TODO: change to real handlers
-                      console.log("Download action");
-                      handleClose();
-                    }}
-                  >
-                    Download
-                  </MenuItem>
-                </Menu>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table
-              className={classes.detailsTable}
-              size="small"
-              aria-label="a dense table"
-            >
-              <TableHead className={classes.tableHead}>
-                <TableRow>
-                  <TableCell className={classes.tableHeadCell} align="left">
-                    MODEL
+                    {row.projectName}
                   </TableCell>
-                  <TableCell className={classes.tableHeadCell} align="right">
-                    STATUS
+                  <TableCell
+                    className={classes.tableCell}
+                    align="left"
+                    onClick={handleClick}
+                  >
+                    {row.status}
+                  </TableCell>
+                  <TableCell
+                    className={classes.tableCell}
+                    align="center"
+                    onClick={handleClick}
+                  >
+                    {row.nextReview}
+                  </TableCell>
+                  <TableCell
+                    className={clsx(
+                      classes.tableCell,
+                      row.milestones.current && classes.textBlue
+                    )}
+                    align="center"
+                    onClick={handleClick}
+                  >
+                    {row.milestones.current}/{row.milestones.amount}
+                  </TableCell>
+                  <TableCell
+                    className={classes.tableCell}
+                    align="center"
+                    onClick={handleClick}
+                  >
+                    {row.delivery}
                   </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {detailsData.map((row) => (
-                  <TableRow hover className={classes.tableRow} key={row.model}>
-                    <TableCell
-                      className={classes.tableCell}
-                      align="left"
-                      component="th"
-                      scope="row"
-                    >
-                      {row.model}
-                    </TableCell>
-                    <TableCell className={classes.tableCell} align="right">
-                      {row.status}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
+              ))}
+              {getEmptyRow<any>(projectsData, pageSize)}
+              <Menu
+                classes={{
+                  paper: classes.menuContainer, // class name, e.g. `classes-nesting-root-x`
+                  list: classes.menuList,
+                }}
+                id="card-actions-menu"
+                anchorEl={anchorEl}
+                getContentAnchorEl={null}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                transformOrigin={{ vertical: "top", horizontal: "center" }}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  classes={{
+                    root: classes.menuItem,
+                  }}
+                  disableGutters
+                  onClick={() => {
+                    // TODO: change to real handlers
+                    console.log("Open action");
+                    handleClose();
+                  }}
+                >
+                  Open
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.menuItem,
+                  }}
+                  disableGutters
+                  onClick={() => {
+                    // TODO: change to real handlers
+                    console.log("Edit action");
+                    handleClose();
+                  }}
+                >
+                  Edit
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.menuItem,
+                  }}
+                  disableGutters
+                  onClick={() => {
+                    // TODO: change to real handlers
+                    console.log("Duplicate action");
+                    handleClose();
+                  }}
+                >
+                  Duplicate
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.menuItem,
+                  }}
+                  disableGutters
+                  onClick={() => {
+                    // TODO: change to real handlers
+                    console.log("Download action");
+                    handleClose();
+                  }}
+                >
+                  Download
+                </MenuItem>
+              </Menu>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
-    </div>
+      <Grid item xs={12} md={4}>
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table
+            className={classes.detailsTable}
+            size="small"
+            aria-label="a dense table"
+          >
+            <TableHead className={classes.tableHead}>
+              <TableRow>
+                <TableCell className={classes.tableHeadCell} align="left">
+                  MODEL
+                </TableCell>
+                <TableCell className={classes.tableHeadCell} align="right">
+                  STATUS
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {detailsData.map((row) => (
+                <TableRow hover className={classes.tableRow} key={row.model}>
+                  <TableCell
+                    className={classes.tableCell}
+                    align="left"
+                    component="th"
+                    scope="row"
+                  >
+                    {row.model}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    {row.status}
+                  </TableCell>
+                </TableRow>
+              ))}
+              {getEmptyRow<any>(detailsData, pageSize)}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    </Grid>
   );
 };
