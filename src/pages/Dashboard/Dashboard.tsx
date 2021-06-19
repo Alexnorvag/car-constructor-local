@@ -14,6 +14,7 @@ import {
   TableRow,
   Theme,
 } from "@material-ui/core";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,14 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tableHeadCell: {
       color: "#929497",
-      fontSize: "16px",
+      fontSize: "20px",
       textTransform: "uppercase",
-      lineHeight: "28px",
+      lineHeight: "35px",
     },
     tableCell: {
       color: "#fff",
-      fontSize: "16px",
-      lineHeight: "28px",
+      fontSize: "20px",
+      lineHeight: "35px",
     },
     menuContainer: {
       background: "#929497",
@@ -44,14 +45,17 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       minWidth: "160px",
     },
+    textBlue: {
+      color: "#055AFC",
+    },
     menuList: {
       padding: 0,
     },
     menuItem: {
-      fontSize: "16px",
+      fontSize: "20px",
       textTransform: "uppercase",
       color: "#fff",
-      lineHeight: "28px",
+      lineHeight: "35px",
     },
     tableRow: {
       "&:hover": {
@@ -74,42 +78,60 @@ function createProjectsData(
   projectName: string,
   status: string,
   nextReview: string,
-  milestones: string,
+  milestones: { current: number; amount: number },
   delivery: string
 ) {
   return { projectName, status, nextReview, milestones, delivery };
 }
 
 const projectsData = [
-  createProjectsData("Kona OS RTE", "DATA", "01/25/21", "0/7", "03/15/21"),
-  createProjectsData("Sante Fe TDI", "REVIEW", "01/07/21", "3/5", "02/01/21"),
+  createProjectsData(
+    "Kona OS RTE",
+    "DATA",
+    "01/25/21",
+    { current: 0, amount: 7 },
+    "03/15/21"
+  ),
+  createProjectsData(
+    "Sante Fe TDI",
+    "REVIEW",
+    "01/07/21",
+    { current: 3, amount: 5 },
+    "02/01/21"
+  ),
   createProjectsData(
     "Kona OS Reveal",
     "PRODUCTION",
     "01/08/21",
-    "3/4",
+    { current: 3, amount: 4 },
     "02/15/21"
   ),
-  createProjectsData("Kona EV RTE", "GARAGING", "01/31/21", "2/7", "04/01/21"),
+  createProjectsData(
+    "Kona EV RTE",
+    "GARAGING",
+    "01/31/21",
+    { current: 2, amount: 7 },
+    "04/01/21"
+  ),
   createProjectsData(
     "Sonata NLine Wheel Cap",
     "DATA",
     "02/20/21",
-    "0/4",
+    { current: 0, amount: 4 },
     "03/15/21"
   ),
   createProjectsData(
     "Nexo Hydrogen Decal",
     "DATA",
     "01/18/21",
-    "0/4",
+    { current: 0, amount: 4 },
     "03/15/21"
   ),
   createProjectsData(
     "MY22 Hyundai Packshots",
     "DATA",
     "02/12/21",
-    "0/7",
+    { current: 0, amount: 7 },
     "03/15/21"
   ),
 ];
@@ -195,11 +217,14 @@ export const Dashboard: FC = () => {
                       {row.nextReview}
                     </TableCell>
                     <TableCell
-                      className={classes.tableCell}
+                      className={clsx(
+                        classes.tableCell,
+                        row.milestones.current && classes.textBlue
+                      )}
                       align="center"
                       onClick={handleClick}
                     >
-                      {row.milestones}
+                      {row.milestones.current}/{row.milestones.amount}
                     </TableCell>
                     <TableCell
                       className={classes.tableCell}
