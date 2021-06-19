@@ -1,6 +1,8 @@
 import React, { FC, useState, MouseEvent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  AppBar,
+  Box,
   createStyles,
   Grid,
   Menu,
@@ -13,6 +15,8 @@ import {
   TableHead,
   TableRow,
   Theme,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
 import clsx from "clsx";
 
@@ -62,6 +66,9 @@ const useStyles = makeStyles((theme: Theme) =>
         background: "#004EFD4B !important",
       },
     },
+    title: {
+      flexGrow: 1,
+    },
     root: {
       flexGrow: 1,
     },
@@ -70,6 +77,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     detailsTable: {
       minWidth: 250,
+    },
+    toolBar: {
+      color: "#929497",
+    },
+    headerBox: {
+      margin: "45px 100px 30px 6px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: theme.spacing(2),
     },
   })
 );
@@ -83,7 +100,6 @@ function createProjectsData(
 ) {
   return { projectName, status, nextReview, milestones, delivery };
 }
-
 const projectsData = [
   createProjectsData(
     "Kona OS RTE",
@@ -143,6 +159,11 @@ const detailsData = [
   createDetailsData("MY21 Santa Fe", "Garaging"),
   createDetailsData("MY21 Tuscon", "Garaging"),
 ];
+function createHeaderData(firstName: string, lastName: string) {
+  return { firstName, lastName };
+}
+const headerData = createHeaderData("FirstName", "LastName");
+
 export const Dashboard: FC = () => {
   const classes = useStyles();
 
@@ -158,7 +179,28 @@ export const Dashboard: FC = () => {
   };
 
   return (
-    <div style={{ color: "red" }}>
+    <div>
+      <AppBar position="static" color="transparent">
+        <Toolbar disableGutters className={classes.toolBar}>
+          <Grid
+            container
+            direction="column"
+            justify="flex-end"
+            alignItems="flex-end"
+          >
+            <Box className={classes.headerBox}>
+              <Typography variant="h5">Title</Typography>
+              <Typography variant="h6">
+                {`User: ${headerData.firstName} ${headerData.lastName}`}
+              </Typography>
+            </Box>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+      <Grid container className={classes.root} spacing={2}>
+        <Grid item xs={12}></Grid>
+      </Grid>
+
       <Grid container className={classes.root} spacing={5}>
         <Grid item xs={12} md={8}>
           <TableContainer component={Paper} className={classes.tableContainer}>
