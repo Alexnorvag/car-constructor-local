@@ -1,6 +1,7 @@
 import { Box } from "@material-ui/core";
 import { FC, useEffect, Suspense, lazy } from "react";
-import { Switch, Route, useHistory, useLocation, Link } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
+
 import Loader from "../components/Loader";
 
 const privateRoutes: string[] = ["/ds", "review"];
@@ -20,38 +21,6 @@ const Page3 = () => {
   return <div>Page 3</div>;
 };
 
-const Nav = () => {
-  return (
-    <nav className="Nav">
-      <div className="Nav__container">
-        {/* <Link to="/" className="Nav__brand">
-          <img src="logo.svg" className="Nav__logo" />
-        </Link> */}
-
-        <div className="Nav__right">
-          <ul className="Nav__item-wrapper">
-            <li className="Nav__item">
-              <Link className="Nav__link" to="/path1">
-                Link 1
-              </Link>
-            </li>
-            <li className="Nav__item">
-              <Link className="Nav__link" to="/path2">
-                Link 2
-              </Link>
-            </li>
-            <li className="Nav__item">
-              <Link className="Nav__link" to="/path3">
-                Link 3
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
 export const PrivateRoutes: FC = () => {
   const history = useHistory();
   const location = useLocation();
@@ -69,12 +38,16 @@ export const PrivateRoutes: FC = () => {
     <Box display="flex">
       <div
         style={{
-          height: 400,
-          width: 200,
+          // height: 400,
+          // width: 200,
           background: "red",
+          position: "absolute",
+          top: "20%",
+          bottom: "20%",
+          left: 0,
         }}
       >
-        <Nav />
+        Sidebar
       </div>
       <Switch>
         <Route exact path="/ds">
