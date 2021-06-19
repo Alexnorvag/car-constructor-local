@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tableHeadCell: {
       color: "#929497",
-      fontSize: "20px",
+      fontSize: "16px",
       textTransform: "uppercase",
-      lineHeight: "35px",
+      lineHeight: "28px",
     },
     tableCell: {
       color: "#fff",
-      fontSize: "20px",
-      lineHeight: "35px",
+      fontSize: "16px",
+      lineHeight: "28px",
     },
     menuContainer: {
       background: "#929497",
@@ -52,10 +52,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 0,
     },
     menuItem: {
-      fontSize: "20px",
+      fontSize: "16px",
       textTransform: "uppercase",
       color: "#fff",
-      lineHeight: "35px",
+      lineHeight: "28px",
     },
     tableRow: {
       "&:hover": {
