@@ -36,7 +36,7 @@ export const PrivateRoutes: FC = () => {
 
   return (
     <Box display="flex">
-      <div
+      {/* <div
         style={{
           // height: 400,
           // width: 200,
@@ -48,7 +48,7 @@ export const PrivateRoutes: FC = () => {
         }}
       >
         Sidebar
-      </div>
+      </div> */}
       <Switch>
         <Route exact path="/ds">
           <Suspense fallback={<Loader />}>

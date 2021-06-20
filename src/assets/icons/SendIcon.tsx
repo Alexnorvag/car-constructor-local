@@ -1,13 +1,17 @@
 import { FC } from "react";
 
-export const SendIcon: FC = () => {
+interface SendIconProps {
+  fill?: string;
+}
+
+export const SendIcon: FC<SendIconProps> = ({ fill }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width="41"
       height="36"
-      fill="#fff"
+      fill={fill}
       viewBox="0.443 0 40.115 36"
     >
       <svg
@@ -24,4 +28,8 @@ export const SendIcon: FC = () => {
       </svg>
     </svg>
   );
+};
+
+SendIcon.defaultProps = {
+  fill: "#fff",
 };
