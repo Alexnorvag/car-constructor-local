@@ -73,7 +73,7 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({
   return (
     <AppBar position="fixed" color="transparent" className={classes.appBar}>
       <Toolbar className={classes.appBarToolbar}>
-        <Grid item className={classes.appBarControls} xs={6}>
+        <Grid item className={classes.appBarControls} xs={2} md={6}>
           <div>
             {windowSize.isMinimizeDrawer && 0 ? (
               <img
@@ -110,7 +110,7 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({
           </div>
         </Grid>
 
-        <Grid item className={classes.appBarRight} xs={6}>
+        <Grid item className={classes.appBarRight} xs={10} md={6}>
           <LayoutHeaderUserWidget />
         </Grid>
       </Toolbar>
