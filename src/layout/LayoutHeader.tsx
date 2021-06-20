@@ -7,16 +7,15 @@ import {
   makeStyles,
   Toolbar,
 } from "@material-ui/core";
+import clsx from "clsx";
 import MenuIcon from "@material-ui/icons/MenuRounded";
 import CloseIcon from "@material-ui/icons/CloseRounded";
 
 import { APPBAR_HEIGHT } from "./state/constants";
 import { useWindowSize } from "../hooks";
-import theme from "../styles";
-import clsx from "clsx";
 import LayoutHeaderUserWidget from "./LayoutHeaderUserWidget";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     appBar: {
       height: APPBAR_HEIGHT,
@@ -35,7 +34,7 @@ const useStyles = makeStyles(() =>
     appBarLogo: { width: 24, height: 24, display: "flex", marginRight: 22 },
     appBarRight: {
       display: "flex",
-      justifyContent: "flex-end",
+      justifyContent: "center",
     },
     menuButton: {
       marginLeft: -12,

@@ -13,11 +13,7 @@ import {
   List,
 } from "@material-ui/core";
 
-import {
-  APPBAR_HEIGHT,
-  DRAWER_WIDTH,
-  DRAWER_WIDTH_TOGGLED,
-} from "./state/constants";
+import { DRAWER_WIDTH, DRAWER_WIDTH_TOGGLED } from "./state/constants";
 import { SteeringWheelIcon } from "../assets/icons/SteeringWheelIcon";
 import { ImageRoundedIcon } from "../assets/icons/ImageRoundedIcon";
 import { EarthGlobeIcon } from "../assets/icons/EarthGlobeIcon";
