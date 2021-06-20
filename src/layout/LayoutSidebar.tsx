@@ -20,6 +20,9 @@ import {
 } from "./state/constants";
 import { SteeringWheelIcon } from "../assets/icons/SteeringWheelIcon";
 import { ImageRoundedIcon } from "../assets/icons/ImageRoundedIcon";
+import { EarthGlobeIcon } from "../assets/icons/EarthGlobeIcon";
+import { CameraIcon } from "../assets/icons/CameraIcon";
+import { MenuIcon } from "../assets/icons/MenuIcon";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,8 +33,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
       // inset: `${APPBAR_HEIGHT}px 0`,
-      height: '70%',
-      top: '15%',
+      height: "70%",
+      top: "15%",
       // bottom: -APPBAR_HEIGHT,
       background: "#929497",
     },
@@ -64,7 +67,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     navList: {
-      marginTop: APPBAR_HEIGHT,
       padding: "23px 0 38px",
     },
     navListItem: {
@@ -112,6 +114,27 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
       label: "Content",
       icon: <ImageRoundedIcon />,
       href: "/content",
+      active: false,
+      visible: true,
+    },
+    {
+      label: "CDN",
+      icon: <EarthGlobeIcon />,
+      href: "/cdn",
+      active: false,
+      visible: true,
+    },
+    {
+      label: "ROD",
+      icon: <CameraIcon />,
+      href: "/rod",
+      active: false,
+      visible: true,
+    },
+    {
+      label: "MENU",
+      icon: <MenuIcon />,
+      href: "/menu",
       active: false,
       visible: true,
     },
