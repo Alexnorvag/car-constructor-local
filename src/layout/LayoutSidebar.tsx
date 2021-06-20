@@ -13,7 +13,11 @@ import {
   List,
 } from "@material-ui/core";
 
-import { DRAWER_WIDTH, DRAWER_WIDTH_TOGGLED } from "./state/constants";
+import {
+  APPBAR_HEIGHT,
+  DRAWER_WIDTH,
+  DRAWER_WIDTH_TOGGLED,
+} from "./state/constants";
 import { SteeringWheelIcon } from "../assets/icons/SteeringWheelIcon";
 import { ImageRoundedIcon } from "../assets/icons/ImageRoundedIcon";
 import { EarthGlobeIcon } from "../assets/icons/EarthGlobeIcon";
@@ -28,11 +32,11 @@ const useStyles = makeStyles((theme: Theme) =>
       whiteSpace: "nowrap",
     },
     drawer: {
-      // inset: `${APPBAR_HEIGHT}px 0`,
-      height: "70%",
-      top: "15%",
-      // bottom: -APPBAR_HEIGHT,
+      top: APPBAR_HEIGHT,
+      height: "auto",
       background: "#929497",
+      overflowX: "hidden",
+      overflowY: "auto",
     },
     drawerOpen: {
       width: DRAWER_WIDTH,
@@ -48,7 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      overflow: "hidden",
       width: DRAWER_WIDTH_TOGGLED,
       "& $navListItem": {
         padding: "20px 22px",
@@ -63,12 +66,13 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     navList: {
-      padding: "23px 0 38px",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 10,
     },
     navListItem: {
       padding: "20px 20px 20px 38px",
       color: "#fff",
-      marginBottom: 15,
       transition: theme.transitions.create("all"),
       textTransform: "uppercase",
     },
@@ -76,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#000",
     },
     navListItemAvatar: {
-      width: 48,
+      width: 44,
       color: "#000",
       minWidth: "initial",
       display: "flex",
