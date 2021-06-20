@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      backdropFilter: "blur(5px)",
     },
     appBarToolbar: {
       minHeight: APPBAR_HEIGHT,
@@ -34,7 +35,10 @@ const useStyles = makeStyles((theme) =>
     appBarLogo: { width: 24, height: 24, display: "flex", marginRight: 22 },
     appBarRight: {
       display: "flex",
-      justifyContent: "center",
+      justifyContent: "flex-end",
+      [theme.breakpoints.up("md")]: {
+        justifyContent: "center",
+      },
     },
     menuButton: {
       marginLeft: -12,

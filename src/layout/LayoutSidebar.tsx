@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     drawer: {
       top: APPBAR_HEIGHT,
       height: "auto",
+      maxHeight: `calc(100% - ${APPBAR_HEIGHT}px)`,
       background: "#929497",
       overflowX: "hidden",
       overflowY: "auto",
