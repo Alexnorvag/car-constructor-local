@@ -187,13 +187,13 @@ export const Dashboard: FC = () => {
                 <TableCell className={classes.tableHeadCell} align="left">
                   STATUS
                 </TableCell>
-                <TableCell className={classes.tableHeadCell} align="right">
+                <TableCell className={classes.tableHeadCell} align="center">
                   NEXT REVIEW
                 </TableCell>
-                <TableCell className={classes.tableHeadCell} align="right">
+                <TableCell className={classes.tableHeadCell} align="center">
                   MILESTONES
                 </TableCell>
-                <TableCell className={classes.tableHeadCell} align="right">
+                <TableCell className={classes.tableHeadCell} align="center">
                   DELIVERY
                 </TableCell>
               </TableRow>
