@@ -19,11 +19,18 @@ import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      gap: 30,
+      [theme.breakpoints.up("md")]: {
+        gap: 40,
+        flexWrap: "nowrap",
+      },
+      [theme.breakpoints.up("lg")]: {
+        gap: 60,
+      },
+    },
     tableContainer: {
       background: "transparent",
-    },
-    table: {
-      // minWidth: 650,
     },
     tableHead: {
       border: "2px solid #929497",
@@ -34,6 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
       textTransform: "uppercase",
       lineHeight: "28px",
       whiteSpace: "nowrap",
+    },
+    tableRow: {
+      "&:hover": {
+        background: "#004EFD4B !important",
+      },
     },
     tableCell: {
       color: "#fff",
@@ -60,24 +72,6 @@ const useStyles = makeStyles((theme: Theme) =>
       textTransform: "uppercase",
       color: "#fff",
       lineHeight: "28px",
-    },
-    tableRow: {
-      "&:hover": {
-        background: "#004EFD4B !important",
-      },
-    },
-    title: {
-      flexGrow: 1,
-    },
-    root: {
-      flexGrow: 1,
-      // gap: '60px',
-    },
-    projectsTable: {
-      // minWidth: 550,
-    },
-    detailsTable: {
-      // minWidth: 250,
     },
   })
 );
@@ -181,14 +175,10 @@ export const Dashboard: FC = () => {
     );
 
   return (
-    <Grid container className={classes.root} spacing={6}>
+    <Box display="flex" flexWrap="wrap" className={classes.root}>
       <Grid item xs={12} md={8}>
         <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table
-            className={classes.projectsTable}
-            size="small"
-            aria-label="a dense table"
-          >
+          <Table size="small" aria-label="a dense table">
             <TableHead className={classes.tableHead}>
               <TableRow>
                 <TableCell className={classes.tableHeadCell} align="left">
@@ -239,10 +229,9 @@ export const Dashboard: FC = () => {
                     {row.nextReview}
                   </TableCell>
                   <TableCell
-                    className={clsx(
-                      classes.tableCell,
-                      row.milestones.current && classes.textBlue
-                    )}
+                    className={clsx(classes.tableCell, {
+                      [classes.textBlue]: row.milestones.current,
+                    })}
                     align="center"
                     onClick={handleClick}
                   >
@@ -332,11 +321,7 @@ export const Dashboard: FC = () => {
 
       <Grid item xs={12} md={4}>
         <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table
-            className={classes.detailsTable}
-            size="small"
-            aria-label="a dense table"
-          >
+          <Table size="small" aria-label="a dense table">
             <TableHead className={classes.tableHead}>
               <TableRow>
                 <TableCell className={classes.tableHeadCell} align="left">
@@ -368,6 +353,6 @@ export const Dashboard: FC = () => {
           </Table>
         </TableContainer>
       </Grid>
-    </Grid>
+    </Box>
   );
 };

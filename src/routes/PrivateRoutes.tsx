@@ -1,4 +1,3 @@
-import { Box } from "@material-ui/core";
 import { FC, useEffect, Suspense, lazy } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 
@@ -35,35 +34,20 @@ export const PrivateRoutes: FC = () => {
   if (!isLoggedIn) return null;
 
   return (
-    <Box display="flex">
-      {/* <div
-        style={{
-          // height: 400,
-          // width: 200,
-          background: "red",
-          position: "absolute",
-          top: "20%",
-          bottom: "20%",
-          left: 0,
-        }}
-      >
-        Sidebar
-      </div> */}
-      <Switch>
-        <Route exact path="/ds">
-          <Suspense fallback={<Loader />}>
-            <DashboardPage />
-          </Suspense>
-        </Route>
-        <Route path="/ds/review">
-          <Suspense fallback={<Loader />}>
-            <ReviewPage />
-          </Suspense>
-        </Route>
-        <Route exact component={Page1} path="/path1" />
-        <Route exact component={Page2} path="/path2" />
-        <Route exact component={Page3} path="/path3" />
-      </Switch>
-    </Box>
+    <Switch>
+      <Route exact path="/ds">
+        <Suspense fallback={<Loader />}>
+          <DashboardPage />
+        </Suspense>
+      </Route>
+      <Route path="/ds/review">
+        <Suspense fallback={<Loader />}>
+          <ReviewPage />
+        </Suspense>
+      </Route>
+      <Route exact component={Page1} path="/path1" />
+      <Route exact component={Page2} path="/path2" />
+      <Route exact component={Page3} path="/path3" />
+    </Switch>
   );
 };

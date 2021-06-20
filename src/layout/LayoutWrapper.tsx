@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { createStyles, makeStyles } from "@material-ui/core";
+import { Box, createStyles, makeStyles } from "@material-ui/core";
 import { PublicRoutes, PrivateRoutes } from "../routes";
 import { useLocation } from "react-router-dom";
 
-import { Page } from "../pages/Page";
 import { useWindowSize, useUserData, useOpen } from "../hooks";
+// import { Page } from "../pages/Page";
 import Layout from "./Layout";
 import AppContainer from "./LayoutContainer";
 
@@ -15,6 +15,7 @@ const useStyles = makeStyles(() =>
       height: "100%",
       position: "absolute",
       background: "#000",
+      overflow: "auto",
     },
   })
 );
@@ -26,13 +27,11 @@ const LayoutWrapper: FC = () => {
   const { email } = useUserData();
   const drawerControls = useOpen(!windowSize.isMinimizeDrawer);
 
-  console.log("windowSize: ", windowSize);
   console.log("location: ", location);
   console.log("email: ", email);
-  console.log("drawerControls: ", drawerControls);
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Layout
         open={drawerControls.opened}
         handleDrawerOpen={drawerControls.open}
@@ -40,17 +39,12 @@ const LayoutWrapper: FC = () => {
       />
 
       <AppContainer open={drawerControls.opened}>
-        <div id="main">
+        <Box>
           <PublicRoutes />
           <PrivateRoutes />
-        </div>
+        </Box>
       </AppContainer>
-
-      {/* <Page>
-        <PublicRoutes />
-        <PrivateRoutes />
-      </Page> */}
-    </div>
+    </Box>
   );
 };
 

@@ -3,15 +3,14 @@ import { Box, createStyles, makeStyles, Typography } from "@material-ui/core";
 
 import { useUserData } from "../hooks";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       padding: 0,
-      margin: 0,
+      // marginInline: theme.spacing(35),
     },
   })
 );
-
 
 const LayoutHeaderUserWidget: FC = () => {
   const classes = useStyles();
