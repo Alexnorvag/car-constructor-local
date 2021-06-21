@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     drawer: {
       top: APPBAR_HEIGHT,
       height: "auto",
+      maxHeight: `calc(100% - ${APPBAR_HEIGHT}px)`,
       background: "#929497",
       overflowX: "hidden",
       overflowY: "auto",
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
       width: DRAWER_WIDTH_TOGGLED,
       "& $navListItem": {
-        padding: "20px 22px",
+        padding: "16px 18px",
         justifyContent: "center",
       },
       "& $navListItemAvatar": {

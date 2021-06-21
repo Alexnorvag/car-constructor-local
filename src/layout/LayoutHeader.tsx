@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import {
   AppBar,
   createStyles,
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      backdropFilter: "blur(5px)",
     },
     appBarToolbar: {
       minHeight: APPBAR_HEIGHT,
@@ -34,7 +35,10 @@ const useStyles = makeStyles((theme) =>
     appBarLogo: { width: 24, height: 24, display: "flex", marginRight: 22 },
     appBarRight: {
       display: "flex",
-      justifyContent: "center",
+      justifyContent: "flex-end",
+      [theme.breakpoints.up("md")]: {
+        justifyContent: "center",
+      },
     },
     menuButton: {
       marginLeft: -12,
@@ -46,10 +50,10 @@ const useStyles = makeStyles((theme) =>
       display: "none",
     },
     icon: {
-      color: "#fff",
+      color: "#929497",
       transition: theme.transitions.create("color"),
       "&:hover": {
-        color: theme.palette.primary.light,
+        color: theme.palette.secondary.light,
       },
     },
   })
