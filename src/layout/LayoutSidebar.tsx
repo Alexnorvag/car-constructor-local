@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
       width: DRAWER_WIDTH_TOGGLED,
       "& $navListItem": {
-        padding: "20px 22px",
+        padding: "16px 18px",
         justifyContent: "center",
       },
       "& $navListItemAvatar": {

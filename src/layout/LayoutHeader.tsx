@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import {
   AppBar,
   createStyles,
@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) =>
       display: "none",
     },
     icon: {
-      color: "#fff",
+      color: "#929497",
       transition: theme.transitions.create("color"),
       "&:hover": {
-        color: theme.palette.primary.light,
+        color: theme.palette.secondary.light,
       },
     },
   })
