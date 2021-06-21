@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-interface AddCommentIconProps {
+interface CommentAddIconProps {
   fill?: string;
 }
 
-export const AddCommentIcon: FC<AddCommentIconProps> = ({ fill }) => {
+export const CommentAddIcon: FC<CommentAddIconProps> = ({ fill }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -33,6 +33,6 @@ export const AddCommentIcon: FC<AddCommentIconProps> = ({ fill }) => {
   );
 };
 
-AddCommentIcon.defaultProps = {
+CommentAddIcon.defaultProps = {
   fill: "#000",
 };
