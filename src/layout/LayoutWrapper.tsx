@@ -4,7 +4,6 @@ import { PublicRoutes, PrivateRoutes } from "../routes";
 import { useLocation } from "react-router-dom";
 
 import { useWindowSize, useUserData, useOpen } from "../hooks";
-// import { Page } from "../pages/Page";
 import Layout from "./Layout";
 import AppContainer from "./LayoutContainer";
 
@@ -13,12 +12,8 @@ const useStyles = makeStyles(() =>
     root: {
       width: "100vw",
       height: "100vh",
-      // position: "absolute",
-      // top: 0,
-      // bottom: 0,
       background: "#000",
-      overflow: 'auto'
-      // overflow: "hidden",
+      overflow: "auto",
     },
   })
 );
