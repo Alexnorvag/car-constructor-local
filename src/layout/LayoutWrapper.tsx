@@ -11,11 +11,14 @@ import AppContainer from "./LayoutContainer";
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      width: "100%",
-      height: "100%",
-      position: "absolute",
+      width: "100vw",
+      height: "100vh",
+      // position: "absolute",
+      // top: 0,
+      // bottom: 0,
       background: "#000",
-      overflow: "auto",
+      overflow: 'auto'
+      // overflow: "hidden",
     },
   })
 );

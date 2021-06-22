@@ -10,9 +10,6 @@ import {
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
-      paddingTop: 25,
-      paddingBottom: 30,
       paddingLeft: "max(2vw, 12px)",
       paddingRight: "max(2vw, 12px)",
       marginTop: APPBAR_HEIGHT,
@@ -21,6 +18,8 @@ const useStyles = makeStyles((theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      overflow: "auto",
+      height: `calc(100% - ${APPBAR_HEIGHT}px)`,
     },
     rootShift: {
       marginLeft: DRAWER_WIDTH,
@@ -29,7 +28,10 @@ const useStyles = makeStyles((theme) =>
         duration: theme.transitions.duration.enteringScreen,
       }),
     },
-    content: {},
+    content: {
+      paddingTop: 25,
+      paddingBottom: 30,
+    },
   })
 );
 
