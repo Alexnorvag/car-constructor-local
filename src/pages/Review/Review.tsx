@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#929497",
       border: "2px solid #929497",
       marginInline: "min(-2vw, -12px)",
-      marginTop: -25
+      marginTop: -25,
     },
     headerBox: {
       display: "flex",

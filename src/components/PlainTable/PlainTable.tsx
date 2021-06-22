@@ -1,4 +1,3 @@
-import React, { MouseEvent, useState } from "react";
 import {
   makeStyles,
   Table,
@@ -10,21 +9,17 @@ import {
 } from "@material-ui/core";
 import createStyles from "@material-ui/styles/createStyles";
 import clsx from "clsx";
+import React, { MouseEvent, useState } from "react";
 
-import { getCellValue } from "./helpers/cell-formatter";
 import EnhancedTableBody from "./EnhancedTableBody";
 import EnhancedTableContainer from "./EnhancedTableContainer";
+import { getCellValue } from "./helpers/cell-formatter";
 import { TableColumn } from "./state/types";
 
 const useStyles = makeStyles(() =>
   createStyles({
     head: {
       border: "2px solid #929497",
-    },
-    row: {
-      "&:hover": {
-        background: "#004EFD4B !important",
-      },
     },
     cell: {
       color: "#fff",
@@ -128,7 +123,7 @@ function PlainTable<RowType extends object>({
 
   const rowRenderer = (row: RowType, idx: number) => {
     return (
-      <TableRow key={idx} className={classes.row}>
+      <TableRow key={idx} hover>
         {columns.map((column, columnIdx) =>
           cellRenderer(column, columnIdx, row)
         )}

@@ -10,4 +10,14 @@ export const theme = createMuiTheme({
       main: "#fff",
     },
   },
+  overrides: {
+    MuiTableRow: {
+      hover: {
+        "&:hover": {
+          cursor: "pointer",
+          backgroundColor: "#004EFD4B !important",
+        },
+      },
+    },
+  },
 });
