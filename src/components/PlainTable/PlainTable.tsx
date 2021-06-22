@@ -43,13 +43,13 @@ const useStyles = makeStyles(() =>
 const StickyTableCell = withStyles((theme: Theme) => ({
   head: {
     left: 0,
-    posititon: "sticky",
+    position: "sticky",
     zIndex: theme.zIndex.appBar + 2,
   },
   body: {
-    minWidht: 150,
+    minWidth: 150,
     left: 0,
-    posititon: "sticky",
+    position: "sticky",
     zIndex: theme.zIndex.appBar + 1,
   },
 }))(TableCell);
@@ -62,7 +62,7 @@ interface PlainTableProps<RowType> {
   menuItems?: string[];
 }
 
-function PlainTable<RowType extends object>({
+function PlainTable<RowType>({
   columns,
   rows,
   withEmptyRows,
