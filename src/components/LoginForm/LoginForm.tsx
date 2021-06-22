@@ -7,6 +7,7 @@ import { loginUser, LoginUserResponse } from "../../api/loginUser";
 
 import FormInput from "../FormInput";
 import { SendIcon } from "../../assets/icons/SendIcon";
+import localStore from "../../utils/localstorage";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -59,7 +60,7 @@ export const LoginForm: FC = () => {
     ({ target: { id, value } }) => {
       setFormState({ ...formState, [id]: value });
     },
-    [formState],
+    [formState]
   );
 
   const validateValues = ({
@@ -133,10 +134,20 @@ export const LoginForm: FC = () => {
 
         setLoading(false);
 
-        const { data } = JSON.parse(response as string);
-        localStorage.setItem("is_logged_in", data.islogged_in);
+        const {
+          data: { is_logged_in, user_profile },
+        } = JSON.parse(response as string);
 
-        history.replace("/ds");
+        localStore.saveState({
+          user: {
+            isLoggedIn: is_logged_in,
+            user_profile: { ...user_profile, email },
+            homeUrl: "/ds",
+          },
+        });
+
+        console.log("TODO: history.replace(/ds)");
+        // history.replace("/ds");
       }
     } catch (error) {
       console.error(error);

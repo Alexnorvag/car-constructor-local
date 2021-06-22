@@ -1,7 +1,14 @@
+import { useCallback } from "react";
+import userActions from "../utils/getUserData";
+
 export const useUserData = () => {
+  const { user_profile, ...userData } = userActions.getUserData();
+
+  const logout = useCallback(() => userActions.logout(), []);
+
   return {
-    email: "test@email.com",
-    firstName: "FirstName",
-    lastName: "LastName",
+    ...user_profile,
+    ...userData,
+    logout,
   };
 };
