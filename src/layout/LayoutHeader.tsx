@@ -30,14 +30,16 @@ const useStyles = makeStyles((theme) =>
       minHeight: APPBAR_HEIGHT,
       paddingLeft: 22,
       color: "#929497",
+      justifyContent: 'space-between'
     },
     appBarControls: { display: "flex", alignItems: "center" },
     appBarLogo: { width: 24, height: 24, display: "flex", marginRight: 22 },
     appBarRight: {
       display: "flex",
-      justifyContent: "flex-end",
-      [theme.breakpoints.up("md")]: {
-        justifyContent: "center",
+      justifyContent: "flex-start",
+      paddingLeft: theme.spacing(6),
+      [theme.breakpoints.down("md")]: {
+        paddingLeft: theme.spacing(1),
       },
     },
     menuButton: {
@@ -76,7 +78,7 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({
   return (
     <AppBar position="fixed" color="transparent" className={classes.appBar}>
       <Toolbar className={classes.appBarToolbar}>
-        <Grid item className={classes.appBarControls} xs={2} md={6}>
+        <Grid item className={classes.appBarControls} xs={2}>
           <div>
             {windowSize.isMinimizeDrawer && 0 ? (
               <img
@@ -113,7 +115,7 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({
           </div>
         </Grid>
 
-        <Grid item className={classes.appBarRight} xs={10} md={6}>
+        <Grid item className={classes.appBarRight} xs={10} sm={6} md={4}>
           <LayoutHeaderUserWidget />
         </Grid>
       </Toolbar>

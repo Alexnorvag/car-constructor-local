@@ -69,10 +69,9 @@ const useStyles = makeStyles((theme: Theme) =>
     navList: {
       display: "flex",
       flexWrap: "wrap",
-      gap: 10,
     },
     navListItem: {
-      padding: "20px 20px 20px 38px",
+      padding: "16px 20px 16px 38px",
       color: "#fff",
       transition: theme.transitions.create("all"),
       textTransform: "uppercase",
@@ -107,7 +106,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
     {
       label: "Garage",
       icon: <SteeringWheelIcon />,
-      href: "/view",
+      href: "/ds/review",
       active: true,
       visible: true,
     },
@@ -133,7 +132,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
       visible: true,
     },
     {
-      label: "MENU",
+      label: "Menu",
       icon: <MenuIcon />,
       href: "/menu",
       active: false,

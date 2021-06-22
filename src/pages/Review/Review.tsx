@@ -14,15 +14,14 @@ import { useHistory, useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      color: "#929497",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      color: "#929497",
       border: "2px solid #929497",
-      marginLeft: "min(-2vw, -12px)",
-      marginRight: "min(-2vw, -12px)",
+      marginInline: "min(-2vw, -12px)",
+      marginTop: -25
     },
-
     headerBox: {
       display: "flex",
       flexDirection: "column",
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: theme.spacing(6),
       },
     },
-
     box: {
       display: "flex",
       flexWrap: "wrap",

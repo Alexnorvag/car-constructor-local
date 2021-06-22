@@ -4,6 +4,9 @@ import { Box, createStyles, Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import PlainTable from "../../components/PlainTable";
+import { createProjectsData, createDetailsData } from "./helpers/create-data";
+import { TableColumn } from "../../components/PlainTable/state/types";
+import { DetailsData, ProjectData } from "./state/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,15 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function createProjectsData(
-  projectName: string,
-  status: string,
-  nextReview: string,
-  milestones: { current: number; amount: number },
-  delivery: string
-) {
-  return { projectName, status, nextReview, milestones, delivery };
-}
 const projectsData = [
   createProjectsData(
     "Kona OS RTE",
@@ -84,9 +78,6 @@ const projectsData = [
   ),
 ];
 
-function createDetailsData(model: string, status: string) {
-  return { model, status };
-}
 const detailsData = [
   createDetailsData("MY21 Elantra", "150% Model"),
   createDetailsData("MY21 Santa Fe", "Garaging"),
@@ -96,7 +87,7 @@ const detailsData = [
 export const Dashboard: FC = () => {
   const classes = useStyles();
 
-  const projectsColumns = useMemo(
+  const projectsColumns: TableColumn<ProjectData>[] = useMemo(
     () => [
       {
         label: "Project Name",
@@ -114,10 +105,10 @@ export const Dashboard: FC = () => {
       {
         label: "Milestones",
         dataKey: "milestones",
-        formatter: (milestone: any) =>
-          `${milestone.current}/${milestone.amount}`,
-        classes: (milestone: any) =>
-          clsx({ [classes.cellActive]: milestone.current }),
+        formatter: (item) =>
+          `${item.milestones?.current}/${item.milestones?.amount}`,
+        classes: (item) =>
+          clsx({ [classes.cellActive]: item.milestones?.current }),
         align: "center",
       },
       {
@@ -129,7 +120,7 @@ export const Dashboard: FC = () => {
     [classes]
   );
 
-  const detailsColumns = useMemo(
+  const detailsColumns: TableColumn<DetailsData>[] = useMemo(
     () => [
       {
         label: "Model",
@@ -147,7 +138,7 @@ export const Dashboard: FC = () => {
   return (
     <Box display="flex" flexWrap="wrap" className={classes.root}>
       <Grid item xs={12} md={8}>
-        <PlainTable
+        <PlainTable<ProjectData>
           columns={projectsColumns}
           rows={projectsData}
           withMenu={true}
@@ -156,7 +147,7 @@ export const Dashboard: FC = () => {
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <PlainTable columns={detailsColumns} rows={detailsData} />
+        <PlainTable<DetailsData> columns={detailsColumns} rows={detailsData} />
       </Grid>
     </Box>
   );

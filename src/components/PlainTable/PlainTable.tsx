@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import {
   makeStyles,
   Table,
@@ -14,6 +14,7 @@ import clsx from "clsx";
 import { getCellValue } from "./helpers/cell-formatter";
 import EnhancedTableBody from "./EnhancedTableBody";
 import EnhancedTableContainer from "./EnhancedTableContainer";
+import { TableColumn } from "./state/types";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -58,21 +59,21 @@ const StickyTableCell = withStyles((theme: Theme) => ({
   },
 }))(TableCell);
 
-interface PlainTableProps {
-  columns: any;
-  rows: any;
+interface PlainTableProps<RowType> {
+  columns: TableColumn<RowType>[];
+  rows: RowType[];
   withEmptyRows?: boolean;
   withMenu?: boolean;
   menuItems?: string[];
 }
 
-const PlainTable: FC<PlainTableProps> = ({
+function PlainTable<RowType extends object>({
   columns,
   rows,
   withEmptyRows,
   withMenu,
   menuItems,
-}) => {
+}: PlainTableProps<RowType>) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -82,10 +83,17 @@ const PlainTable: FC<PlainTableProps> = ({
 
   const menuClose = () => setAnchorEl(null);
 
-  const cellRenderer = (column: any, columnIdx: number, row: any) => {
+  const cellRenderer = (
+    column: TableColumn<any>,
+    columnIdx: number,
+    row: any
+  ) => {
     const CellComponent = columnIdx ? TableCell : StickyTableCell;
+
     const extraClasses =
-      row && column.classes && column.classes(row[column.dataKey]);
+      row &&
+      column.classes &&
+      column.classes({ [column.dataKey]: row[column.dataKey] });
 
     return (
       <CellComponent
@@ -102,7 +110,7 @@ const PlainTable: FC<PlainTableProps> = ({
     );
   };
 
-  const headerRenderer = (column: any, idx: number) => {
+  const headerRenderer = (column: TableColumn<RowType>, idx: number) => {
     const CellComponent = idx ? TableCell : StickyTableCell;
     const cellAlign = column.align || "left";
 
@@ -118,10 +126,10 @@ const PlainTable: FC<PlainTableProps> = ({
     );
   };
 
-  const rowRenderer = (row: any, idx: number) => {
+  const rowRenderer = (row: RowType, idx: number) => {
     return (
       <TableRow key={idx} className={classes.row}>
-        {columns.map((column: any, columnIdx: number) =>
+        {columns.map((column, columnIdx) =>
           cellRenderer(column, columnIdx, row)
         )}
       </TableRow>
@@ -139,13 +147,13 @@ const PlainTable: FC<PlainTableProps> = ({
         <TableHead className={classes.head}>
           <TableRow>{columns.map(headerRenderer)}</TableRow>
         </TableHead>
-        <EnhancedTableBody<any> rows={rows} withEmptyRows={withEmptyRows}>
-          {(enhancedRows: any) => enhancedRows.map(rowRenderer)}
+        <EnhancedTableBody<RowType> rows={rows} withEmptyRows={withEmptyRows}>
+          {(enhancedRows) => enhancedRows.map(rowRenderer)}
         </EnhancedTableBody>
       </Table>
     </EnhancedTableContainer>
   );
-};
+}
 
 export default PlainTable;
 
