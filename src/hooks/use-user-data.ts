@@ -1,14 +1,16 @@
-import { useCallback } from "react";
-import userActions from "../utils/getUserData";
+import { useCallback, useContext } from "react";
+
+import { UserContext } from "../context/user";
 
 export const useUserData = () => {
-  const { user_profile, ...userData } = userActions.getUserData();
+  const { user, clearUserData } = useContext(UserContext);
+  const isLoggedIn = !!user?.email;
 
-  const logout = useCallback(() => userActions.logout(), []);
+  const logout = useCallback(() => clearUserData(), [clearUserData]);
 
   return {
-    ...user_profile,
-    ...userData,
+    ...user,
+    isLoggedIn,
     logout,
   };
 };

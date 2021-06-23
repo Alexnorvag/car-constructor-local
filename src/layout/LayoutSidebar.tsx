@@ -23,11 +23,13 @@ import { ImageRoundedIcon } from "../assets/icons/ImageRoundedIcon";
 import { EarthGlobeIcon } from "../assets/icons/EarthGlobeIcon";
 import { CameraIcon } from "../assets/icons/CameraIcon";
 import { MenuIcon } from "../assets/icons/MenuIcon";
-import { DashIcon } from "../assets/icons/DashIcon";
-import { CommentAddIcon } from "../assets/icons/CommentAddIcon";
-import { CommentSpeechIcon } from "../assets/icons/CommentSpeechIcon";
-import { CommentRemoveIcon } from "../assets/icons/CommentRemoveIcon";
-import { HomeIcon } from "../assets/icons/HomeIcon";
+// import { DashIcon } from "../assets/icons/DashIcon";
+// import { CommentAddIcon } from "../assets/icons/CommentAddIcon";
+// import { CommentSpeechIcon } from "../assets/icons/CommentSpeechIcon";
+// import { CommentRemoveIcon } from "../assets/icons/CommentRemoveIcon";
+// import { HomeIcon } from "../assets/icons/HomeIcon";
+import Route from "../routes/types";
+import { isRoute } from "../utils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -107,44 +109,44 @@ interface LayoutSidebarProps {
 const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
   const classes = useStyles();
 
-  // // dashboard pages
-  // const pages = [
-  //   {
-  //     label: "Garage",
-  //     icon: <SteeringWheelIcon />,
-  //     href: "/ds/review",
-  //     active: true,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Content",
-  //     icon: <ImageRoundedIcon />,
-  //     href: "/content",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "CDN",
-  //     icon: <EarthGlobeIcon />,
-  //     href: "/cdn",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "ROD",
-  //     icon: <CameraIcon />,
-  //     href: "/rod",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Menu",
-  //     icon: <MenuIcon />,
-  //     href: "/menu",
-  //     active: false,
-  //     visible: true,
-  //   },
-  // ];
+  // dashboard pages
+  const pages = [
+    {
+      label: "Garage",
+      icon: <SteeringWheelIcon />,
+      href: Route.DASHBOARD_REVIEW,
+      active: isRoute(Route.DASHBOARD_REVIEW),
+      visible: true,
+    },
+    {
+      label: "Content",
+      icon: <ImageRoundedIcon />,
+      href: "/content",
+      active: false,
+      visible: true,
+    },
+    {
+      label: "CDN",
+      icon: <EarthGlobeIcon />,
+      href: "/cdn",
+      active: false,
+      visible: true,
+    },
+    {
+      label: "ROD",
+      icon: <CameraIcon />,
+      href: "/rod",
+      active: false,
+      visible: true,
+    },
+    {
+      label: "Menu",
+      icon: <MenuIcon />,
+      href: Route.DASHBOARD,
+      active: isRoute(Route.DASHBOARD),
+      visible: true,
+    },
+  ].filter((item) => item.visible);
 
   // const presentationPages = [
   //   {
@@ -184,43 +186,43 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
   //   },
   // ];
 
-  const galleryPages = [
-    {
-      label: "Home",
-      icon: <HomeIcon />,
-      href: "/ds/review",
-      active: true,
-      visible: true,
-    },
-    {
-      label: "Add",
-      icon: <CommentAddIcon />,
-      href: "/content",
-      active: false,
-      visible: true,
-    },
-    {
-      label: "Show",
-      icon: <CommentSpeechIcon />,
-      href: "/show",
-      active: false,
-      visible: true,
-    },
-    {
-      label: "Hide",
-      icon: <CommentRemoveIcon />,
-      href: "/hide",
-      active: false,
-      visible: true,
-    },
-    {
-      label: "Menu",
-      icon: <MenuIcon />,
-      href: "/menu",
-      active: false,
-      visible: true,
-    },
-  ];
+  // const galleryPages = [
+  //   {
+  //     label: "Home",
+  //     icon: <HomeIcon />,
+  //     href: "/ds/review",
+  //     active: true,
+  //     visible: true,
+  //   },
+  //   {
+  //     label: "Add",
+  //     icon: <CommentAddIcon />,
+  //     href: "/content",
+  //     active: false,
+  //     visible: true,
+  //   },
+  //   {
+  //     label: "Show",
+  //     icon: <CommentSpeechIcon />,
+  //     href: "/show",
+  //     active: false,
+  //     visible: true,
+  //   },
+  //   {
+  //     label: "Hide",
+  //     icon: <CommentRemoveIcon />,
+  //     href: "/hide",
+  //     active: false,
+  //     visible: true,
+  //   },
+  //   {
+  //     label: "Menu",
+  //     icon: <MenuIcon />,
+  //     href: "/menu",
+  //     active: false,
+  //     visible: true,
+  //   },
+  // ];
 
   return (
     <Drawer
@@ -238,9 +240,9 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
         component="nav"
         aria-label="application stack"
       >
-        {galleryPages.map((page) => (
-          // {presentationPages.map((page) => (
-          // {pages.map((page) => (
+        {/* {galleryPages.map((page) => ( */}
+        {/* {presentationPages.map((page) => ( */}
+        {pages.map((page) => (
           <Tooltip title={open ? "" : page.label} key={page.label}>
             <ListItem
               button

@@ -1,33 +1,56 @@
-import React, { createContext, FC, useState } from "react";
+import React, { createContext, FC, useEffect, useState } from "react";
 
-type UserType = {
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-};
+import Route from "../routes/types";
+import { UserProviderState, UserState } from "../types";
+import localStore from "../utils/localstorage";
 
-interface UserProviderProps {
-  user: UserType;
-}
-
-export const userContextDefaultValue: UserProviderProps = {
+export const initialState: UserProviderState = {
   user: {
-    email: "",
-    firstName: "",
-    lastName: "",
+    email: null,
+    homeUrl: Route.NOT_FOUND,
+    firstname: null,
+    lastname: null,
+    avatar: null,
+    username: null,
   },
+  setUserData: (): void => {
+    throw new Error("setContext function must be overridden");
+  },
+  clearUserData: (): void => {},
 };
 
-export const UserContext = createContext<UserProviderProps>(
-  userContextDefaultValue
-);
+export const UserContext = createContext<UserProviderState>(initialState);
 
-export const UserProvider: FC<UserProviderProps> = ({ user, children }) => {
-  console.log("user: ", user);
-  const [currentUser, setCurrentUser] = useState({ user });
+export const UserProvider: FC = ({ children }) => {
+  const [user, setUser] = useState<UserState>(initialState.user);
+  // console.log("[UserProvider] -> user: ", user);
+
+  const setUserData = (userState: UserState) => {
+    setUser(userState);
+
+    localStore.saveState({
+      user: {
+        ...userState,
+      },
+    });
+  };
+
+  const clearUserData = () => {
+    setUser(initialState.user);
+
+    localStore.saveState({ user: initialState.user });
+  };
+
+  console.log("TODO: CHANGE TO IF USER FINDED RERENDER ", user);
+  // Check if user exist in the local store
+  useEffect(() => {
+    const userState = localStore.loadState("state");
+
+    setUser(userState?.user);
+  }, []);
 
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <UserContext.Provider value={{ user, setUserData, clearUserData }}>
       {children}
     </UserContext.Provider>
   );

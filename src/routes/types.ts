@@ -5,7 +5,7 @@ enum Route {
   ABOUT = "/about",
 
   DASHBOARD = "/ds",
-  DASHBOARD_REVIEW = "/ds/review",
+  DASHBOARD_REVIEW = "/review",
 
   NOT_FOUND = "/page-not-found",
   ALL = "*",

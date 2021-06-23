@@ -1,13 +1,11 @@
-import { FC, useState, useCallback } from "react";
-import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import { FC, useCallback, useContext, useState } from "react";
 import { loginUser, LoginUserResponse } from "../../api/loginUser";
-
-import FormInput from "../FormInput";
 import { SendIcon } from "../../assets/icons/SendIcon";
-import localStore from "../../utils/localstorage";
+import { UserContext } from "../../context/user";
+import FormInput from "../FormInput";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -38,7 +36,7 @@ type FormState = {
 
 export const LoginForm: FC = () => {
   const classes = useStyles();
-  const history = useHistory();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>({
     email: "",
@@ -49,6 +47,7 @@ export const LoginForm: FC = () => {
       internalError: "",
     },
   });
+  const user = useContext(UserContext);
 
   const {
     email,
@@ -135,19 +134,19 @@ export const LoginForm: FC = () => {
         setLoading(false);
 
         const {
-          data: { is_logged_in, user_profile },
+          data: {
+            user_profile: { firstname, lastname, avatar, username },
+          },
         } = JSON.parse(response as string);
 
-        localStore.saveState({
-          user: {
-            isLoggedIn: is_logged_in,
-            user_profile: { ...user_profile, email },
-            homeUrl: "/ds",
-          },
+        user.setUserData({
+          email,
+          homeUrl: "/ds",
+          firstname,
+          lastname,
+          avatar,
+          username,
         });
-
-        console.log("TODO: history.replace(/ds)");
-        // history.replace("/ds");
       }
     } catch (error) {
       console.error(error);
