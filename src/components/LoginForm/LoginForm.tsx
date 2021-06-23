@@ -141,11 +141,13 @@ export const LoginForm: FC = () => {
 
         user.setUserData({
           email,
-          homeUrl: "/ds",
+          homeUrl: "/",
           firstname,
           lastname,
           avatar,
           username,
+          // permissions: ["/ds"],
+          permissions: ["/ds", "/ds/review"],
         });
       }
     } catch (error) {

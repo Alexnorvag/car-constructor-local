@@ -14,6 +14,7 @@ export interface UserState {
   lastname: string | null;
   avatar: string | null;
   username: string | null;
+  permissions: string[];
 }
 
 export interface UserProviderState {

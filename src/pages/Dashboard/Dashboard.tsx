@@ -1,12 +1,14 @@
 import React, { FC, useMemo } from "react";
 import clsx from "clsx";
-import { Box, createStyles, Grid, Theme } from "@material-ui/core";
+import { Box, Button, createStyles, Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import PlainTable from "../../components/PlainTable";
 import { createProjectsData, createDetailsData } from "./helpers/create-data";
 import { TableColumn } from "../../components/PlainTable/state/types";
 import { DetailsData, ProjectData } from "./state/types";
+import { useHistory } from "react-router-dom";
+import Route from "../../routes/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,6 +88,7 @@ const detailsData = [
 
 export const Dashboard: FC = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const projectsColumns: TableColumn<ProjectData>[] = useMemo(
     () => [
@@ -136,19 +139,30 @@ export const Dashboard: FC = () => {
   );
 
   return (
-    <Box display="flex" flexWrap="wrap" className={classes.root}>
-      <Grid item xs={12} md={8}>
-        <PlainTable<ProjectData>
-          columns={projectsColumns}
-          rows={projectsData}
-          withMenu={true}
-          menuItems={["Open", "Edit", "Duplicate", "Download"]}
-        />
-      </Grid>
+    <>
+      <Box display="flex" flexWrap="wrap" className={classes.root}>
+        <Grid item xs={12} md={8}>
+          <PlainTable<ProjectData>
+            columns={projectsColumns}
+            rows={projectsData}
+            withMenu={true}
+            menuItems={["Open", "Edit", "Duplicate", "Download"]}
+          />
+        </Grid>
 
-      <Grid item xs={12} md={4}>
-        <PlainTable<DetailsData> columns={detailsColumns} rows={detailsData} />
-      </Grid>
-    </Box>
+        <Grid item xs={12} md={4}>
+          <PlainTable<DetailsData>
+            columns={detailsColumns}
+            rows={detailsData}
+          />
+        </Grid>
+      </Box>
+      <Button
+        variant="contained"
+        onClick={() => history.push(Route.DASHBOARD_REVIEW)}
+      >
+        Go to review
+      </Button>
+    </>
   );
 };

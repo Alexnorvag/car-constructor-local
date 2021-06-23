@@ -3,25 +3,38 @@ import { useHistory } from "react-router-dom";
 
 import Route from "../routes/types";
 import { useUserData } from "../hooks";
-import { UNAUTHORIZED_ROUTES } from "../routes/constants";
+import { PRIVATE_ROUTES, UNAUTHORIZED_ROUTES } from "../routes/constants";
 import { isRoute } from "../utils";
 
 interface RedirectContainerProps {}
 
 const RedirectContainer: FC<RedirectContainerProps> = ({ children }) => {
   const history = useHistory();
-
-  const { isLoggedIn, homeUrl } = useUserData();
+  const { isLoggedIn, hasRoutePermissions, homeUrl } = useUserData();
 
   useEffect(() => {
     if (!isLoggedIn) return;
     console.log("LOGGED IN");
 
+    // console.log(
+    //   "[Route.LOGIN, { path: Route.ROOT, exact: true }]) && homeUrl: ",
+    //   [Route.LOGIN, { path: Route.ROOT, exact: true }] && homeUrl
+    // );
     if (isRoute([Route.LOGIN, { path: Route.ROOT, exact: true }]) && homeUrl) {
       history.push(homeUrl);
       return;
     }
-  }, [isLoggedIn, homeUrl, history]);
+
+    const privateRoute = PRIVATE_ROUTES.find((item: Route) => isRoute(item));
+    console.log("privateRoute: ", privateRoute);
+    if (
+      !isRoute(Route.NOT_FOUND) &&
+      privateRoute &&
+      !hasRoutePermissions(privateRoute)
+    ) {
+      history.push(Route.NOT_FOUND);
+    }
+  }, [isLoggedIn, homeUrl, history, hasRoutePermissions]);
 
   useEffect(() => {
     if (isLoggedIn) return;

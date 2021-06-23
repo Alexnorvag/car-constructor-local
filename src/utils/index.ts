@@ -3,7 +3,7 @@ import { matchPath } from "react-router-dom";
 import { CustomRouteToMatch } from "../types";
 import Route from "../routes/types";
 
-const isRouteMath = (path: string, route: Route | CustomRouteToMatch) =>
+const isRouteMatch = (path: string, route: Route | CustomRouteToMatch) =>
   !!matchPath(path, {
     path: (route as CustomRouteToMatch)?.path ?? route,
     exact: (route as CustomRouteToMatch)?.exact ?? undefined,
@@ -15,12 +15,14 @@ export const isRoute = (
   customRoute?: string
 ) => {
   const routeToMatch = customRoute ?? window.location.pathname;
-
+  // console.log('routeToMatch: ', routeToMatch);
+  console.log('route: ', route);
+  // console.log('isRouteMatch(routeToMatch, route): ', isRouteMatch(routeToMatch, route));
   if (Array.isArray(route)) {
     return route.some((item: Route | CustomRouteToMatch) =>
-      isRouteMath(routeToMatch, item)
+      isRouteMatch(routeToMatch, item)
     );
   }
 
-  return isRouteMath(routeToMatch, route);
+  return isRouteMatch(routeToMatch, route);
 };

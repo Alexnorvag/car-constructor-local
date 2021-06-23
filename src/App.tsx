@@ -13,7 +13,6 @@ function App() {
         <UserProvider>
           <RedirectContainer>
             <MainRoutes />
-            {/* <LayoutWrapper /> */}
           </RedirectContainer>
         </UserProvider>
       </Router>

@@ -30,6 +30,7 @@ import { MenuIcon } from "../assets/icons/MenuIcon";
 // import { HomeIcon } from "../assets/icons/HomeIcon";
 import Route from "../routes/types";
 import { isRoute } from "../utils";
+import { useUserData } from "../hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -108,6 +109,7 @@ interface LayoutSidebarProps {
 
 const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
   const classes = useStyles();
+  const { hasRoutePermissions } = useUserData();
 
   // dashboard pages
   const pages = [
@@ -117,6 +119,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
       href: Route.DASHBOARD_REVIEW,
       active: isRoute(Route.DASHBOARD_REVIEW),
       visible: true,
+      // visible: hasRoutePermissions(Route.DASHBOARD_REVIEW),
     },
     {
       label: "Content",
@@ -144,7 +147,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
       icon: <MenuIcon />,
       href: Route.DASHBOARD,
       active: isRoute(Route.DASHBOARD),
-      visible: true,
+      visible: hasRoutePermissions(Route.DASHBOARD),
     },
   ].filter((item) => item.visible);
 

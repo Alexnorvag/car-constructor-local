@@ -17,6 +17,7 @@ const authenticatedRoutes: RouteProps[] = [
   {
     path: Route.NOT_FOUND,
     component: NotFound,
+    exact: true,
   },
 ];
 

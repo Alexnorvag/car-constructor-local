@@ -1,6 +1,5 @@
 import { Box, createStyles, makeStyles } from "@material-ui/core";
 import React, { FC } from "react";
-import { useLocation } from "react-router-dom";
 
 import { useOpen, useWindowSize } from "../hooks";
 import AuthenticatedRoutes from "../routes/components/AuthenticatedRoutes";
@@ -21,10 +20,7 @@ const useStyles = makeStyles(() =>
 const LayoutWrapper: FC = () => {
   const classes = useStyles();
   const windowSize = useWindowSize();
-  const location = useLocation();
   const drawerControls = useOpen(!windowSize.isMinimizeDrawer);
-
-  console.log("location: ", location);
 
   return (
     <Box className={classes.root}>
