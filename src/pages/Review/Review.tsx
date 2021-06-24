@@ -113,21 +113,21 @@ const StatusData = createStatusData("In Production");
 
 export const Review: FC = () => {
   const classes = useStyles();
-  // const location = useLocation();
-  // const history = useHistory();
-  // const query = new URLSearchParams(location.search);
-  // const view = query.get("view");
+  const location = useLocation();
+  const history = useHistory();
+  const query = new URLSearchParams(location.search);
+  const view = query.get("view");
 
-  // useEffect(() => {
-  //   if (!view) {
-  //     const url = new URL(window.location.href);
-  //     url.search = "?view=presentation";
+  useEffect(() => {
+    if (!view) {
+      const url = new URL(window.location.href);
+      url.search = "?view=presentation";
 
-  //     history.replace(url.pathname + url.search);
-  //   }
-  // }, [history, location.pathname, location.search, view]);
+      history.replace(url.pathname + url.search);
+    }
+  }, [history, location.pathname, location.search, view]);
 
-  // console.log("views: ", views);
+  console.log("views: ", views);
 
   return (
     <div className={classes.root}>

@@ -7,12 +7,12 @@ import Route from "./types";
 
 const authenticatedRoutes: RouteProps[] = [
   {
-    path: Route.DASHBOARD,
-    component: Dashboard,
-  },
-  {
     path: Route.DASHBOARD_REVIEW,
     component: Review,
+  },
+  {
+    path: Route.DASHBOARD,
+    component: Dashboard,
   },
   {
     path: Route.NOT_FOUND,

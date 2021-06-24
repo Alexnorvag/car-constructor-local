@@ -15,9 +15,7 @@ export const isRoute = (
   customRoute?: string
 ) => {
   const routeToMatch = customRoute ?? window.location.pathname;
-  // console.log('routeToMatch: ', routeToMatch);
-  console.log('route: ', route);
-  // console.log('isRouteMatch(routeToMatch, route): ', isRouteMatch(routeToMatch, route));
+
   if (Array.isArray(route)) {
     return route.some((item: Route | CustomRouteToMatch) =>
       isRouteMatch(routeToMatch, item)
