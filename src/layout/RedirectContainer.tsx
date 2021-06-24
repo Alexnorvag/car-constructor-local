@@ -16,17 +16,12 @@ const RedirectContainer: FC<RedirectContainerProps> = ({ children }) => {
     if (!isLoggedIn) return;
     console.log("LOGGED IN");
 
-    // console.log(
-    //   "[Route.LOGIN, { path: Route.ROOT, exact: true }]) && homeUrl: ",
-    //   [Route.LOGIN, { path: Route.ROOT, exact: true }] && homeUrl
-    // );
     if (isRoute([Route.LOGIN, { path: Route.ROOT, exact: true }]) && homeUrl) {
       history.push(homeUrl);
       return;
     }
 
     const privateRoute = PRIVATE_ROUTES.find((item: Route) => isRoute(item));
-    console.log("privateRoute: ", privateRoute);
     if (
       !isRoute(Route.NOT_FOUND) &&
       privateRoute &&
