@@ -5,8 +5,8 @@ import React, { FC, useMemo } from "react";
 
 import PlainTable from "../../components/PlainTable";
 import { TableColumn } from "../../components/PlainTable/state/types";
-import { DASHBOARD_ROUTES } from "../../routes/constants";
-import { isRoute } from "../../utils";
+// import { DASHBOARD_ROUTES } from "../../routes/constants";
+// import { isRoute } from "../../utils";
 import { createDetailsData, createProjectsData } from "./helpers/create-data";
 import { DetailsData, ProjectData } from "./state/types";
 

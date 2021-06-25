@@ -8,8 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { FC, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { FC } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,10 +83,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const views = {
-  presentation: "Presentation",
-  gallery: "Gallery",
-};
+// const views = {
+//   presentation: "Presentation",
+//   gallery: "Gallery",
+// };
 function createProjectNameData(projectName: string) {
   return { projectName };
 }

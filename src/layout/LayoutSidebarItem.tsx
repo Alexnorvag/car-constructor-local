@@ -11,25 +11,24 @@ import { Link } from "react-router-dom";
 
 import { useWindowSize } from "../hooks";
 
+interface StyleProps {
+  isMobile?: boolean;
+  open?: boolean;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     navListItem: {
-      // justifyContent: "center",
-    //   padding: (props) => {
-    //     console.log("props: ", props);
-    //     return props?.open
-    //       ? props?.isMobile
-    //         ? "8px 4px"
-    //         : "16px 10px"
-    //       : props?.isMobile
-    //       ? "8px 4px"
-    //       : "16px 20px 16px 24px";
-    //   },
+      justifyContent: ({ open }: StyleProps) =>
+        open ? "flex-start" : "center",
+      padding: ({ isMobile }: StyleProps) =>
+        isMobile ? "8px 4px" : "16px 20px 16px 24px",
       color: "#000",
       transition: theme.transitions.create("all"),
       textTransform: "uppercase",
-      display: (isMobile) => (isMobile ? "inline-block" : "inherit"),
-      textAlign: (isMobile) => (isMobile ? "center" : "left"),
+      display: ({ isMobile }: StyleProps) =>
+        isMobile ? "inline-block" : "inherit",
+      textAlign: ({ isMobile }: StyleProps) => (isMobile ? "center" : "left"),
     },
     navListItemActive: {
       color: "#fff",
@@ -41,7 +40,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const LayoutSidebarItem: FC<any> = ({
+interface LayoutSidebarItemProps {
+  label: string;
+  open: boolean;
+  active: boolean;
+  href: string | undefined;
+  onClick: (() => void) | undefined;
+}
+
+const LayoutSidebarItem: FC<LayoutSidebarItemProps> = ({
   children,
   open,
   label,
@@ -51,10 +58,9 @@ const LayoutSidebarItem: FC<any> = ({
 }) => {
   const { isMobile } = useWindowSize();
   const classes = useStyles({ isMobile, open });
+  const isLink = !!onClick;
   const itemProps = {
-    ...(onClick
-      ? { component: "div", onClick }
-      : { component: Link, to: href }),
+    ...(isLink ? { component: "div", onClick } : { component: Link, to: href }),
   };
 
   return (

@@ -1,15 +1,12 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import {
   createStyles,
   Drawer,
-  ListItem,
   ListItemAvatar,
   ListItemText,
   makeStyles,
   Theme,
-  Tooltip,
   List,
 } from "@material-ui/core";
 
@@ -64,10 +61,6 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.leavingScreen,
       }),
       width: DRAWER_WIDTH_TOGGLED,
-      "& $navListItem": {
-        padding: (isMobile) => (isMobile ? "8px 4px" : "16px 10px"),
-        justifyContent: "center",
-      },
       "& $navListItemAvatar": {
         marginRight: (isMobile) => (isMobile ? "auto" : 0),
         marginBottom: (isMobile) => (isMobile ? "-10px" : 0),
@@ -80,21 +73,6 @@ const useStyles = makeStyles((theme: Theme) =>
     navList: {
       display: "flex",
       flexWrap: "wrap",
-    },
-    navListItem: {
-      padding: (isMobile) => (isMobile ? "8px 4px" : "16px 20px 16px 24px"),
-      color: "#000",
-      transition: theme.transitions.create("all"),
-      textTransform: "uppercase",
-      display: (isMobile) => (isMobile ? "inline-block" : "inherit"),
-      textAlign: (isMobile) => (isMobile ? "center" : "left"),
-    },
-    navListItemActive: {
-      color: "#fff",
-
-      "& svg": {
-        fill: "#fff",
-      },
     },
     navListItemAvatar: {
       width: 44,
@@ -119,38 +97,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-const EnhancedListItem: FC<any> = ({
-  children,
-  open,
-  label,
-  active,
-  href,
-  onClick,
-}) => {
-  const { isMobile } = useWindowSize();
-  const classes = useStyles(isMobile);
-  const itemProps = {
-    ...(onClick
-      ? { component: "div", onClick }
-      : { component: Link, to: href }),
-  };
-
-  return (
-    <Tooltip title={open ? "" : label}>
-      <ListItem
-        key={label}
-        button
-        className={clsx(classes.navListItem, {
-          [classes.navListItemActive]: active,
-        })}
-        {...itemProps}
-      >
-        {children}
-      </ListItem>
-    </Tooltip>
-  );
-};
 
 interface LayoutSidebarProps {
   open: boolean;
@@ -262,8 +208,14 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
         aria-label="application stack"
       >
         {pages.map((page) => (
-          // <EnhancedListItem key={page.label} {...page}>
-          <LayoutSidebarItem key={page.label} {...page}>
+          <LayoutSidebarItem
+            key={page.label}
+            open={open}
+            label={page.label}
+            active={page.active}
+            href={page.href}
+            onClick={page.onClick}
+          >
             <ListItemAvatar className={classes.navListItemAvatar}>
               {page.icon}
             </ListItemAvatar>
@@ -274,7 +226,6 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
                 [classes.navListItemTextActive]: page.active,
               })}
             />
-          {/* </EnhancedListItem> */}
           </LayoutSidebarItem>
         ))}
       </List>
