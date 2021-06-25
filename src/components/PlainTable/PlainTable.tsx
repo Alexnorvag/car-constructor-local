@@ -60,6 +60,7 @@ interface PlainTableProps<RowType> {
   withEmptyRows?: boolean;
   withMenu?: boolean;
   menuItems?: string[];
+  sticky?: boolean;
 }
 
 function PlainTable<RowType>({
@@ -68,6 +69,7 @@ function PlainTable<RowType>({
   withEmptyRows,
   withMenu,
   menuItems,
+  sticky,
 }: PlainTableProps<RowType>) {
   const classes = useStyles();
 
@@ -83,7 +85,7 @@ function PlainTable<RowType>({
     columnIdx: number,
     row: any
   ) => {
-    const CellComponent = columnIdx ? TableCell : StickyTableCell;
+    const CellComponent = sticky && !columnIdx ? StickyTableCell : TableCell;
 
     const extraClasses =
       row &&
@@ -106,7 +108,7 @@ function PlainTable<RowType>({
   };
 
   const headerRenderer = (column: TableColumn<RowType>, idx: number) => {
-    const CellComponent = idx ? TableCell : StickyTableCell;
+    const CellComponent = sticky && !idx ? StickyTableCell : TableCell;
     const cellAlign = column.align || "left";
 
     return (
@@ -138,7 +140,7 @@ function PlainTable<RowType>({
       anchorEl={anchorEl}
       menuClose={menuClose}
     >
-      <Table size="small" aria-label="sticky table">
+      <Table size="small" aria-label="plain table">
         <TableHead className={classes.head}>
           <TableRow>{columns.map(headerRenderer)}</TableRow>
         </TableHead>
@@ -158,4 +160,5 @@ PlainTable.defaultProps = {
   withEmptyRows: true,
   withMenu: false,
   menuItems: [],
+  sticky: false,
 };

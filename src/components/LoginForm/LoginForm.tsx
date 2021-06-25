@@ -146,8 +146,7 @@ export const LoginForm: FC = () => {
           lastname,
           avatar,
           username,
-          // permissions: ["/ds"],
-          permissions: ["/ds", "/ds/review"],
+          permissions: ["/ds", "/review"],
         });
       }
     } catch (error) {

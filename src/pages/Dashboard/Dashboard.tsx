@@ -1,14 +1,14 @@
-import React, { FC, useMemo } from "react";
-import clsx from "clsx";
-import { Box, Button, createStyles, Grid, Theme } from "@material-ui/core";
+import { Box, createStyles, Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import React, { FC, useMemo } from "react";
 
 import PlainTable from "../../components/PlainTable";
-import { createProjectsData, createDetailsData } from "./helpers/create-data";
 import { TableColumn } from "../../components/PlainTable/state/types";
+import { DASHBOARD_ROUTES } from "../../routes/constants";
+import { isRoute } from "../../utils";
+import { createDetailsData, createProjectsData } from "./helpers/create-data";
 import { DetailsData, ProjectData } from "./state/types";
-import { useHistory } from "react-router-dom";
-import Route from "../../routes/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,7 +88,6 @@ const detailsData = [
 
 export const Dashboard: FC = () => {
   const classes = useStyles();
-  const history = useHistory();
 
   const projectsColumns: TableColumn<ProjectData>[] = useMemo(
     () => [
@@ -157,12 +156,6 @@ export const Dashboard: FC = () => {
           />
         </Grid>
       </Box>
-      <Button
-        variant="contained"
-        onClick={() => history.push(Route.DASHBOARD_REVIEW)}
-      >
-        Go to review
-      </Button>
     </>
   );
 };
