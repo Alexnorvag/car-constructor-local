@@ -1,11 +1,13 @@
-import React, { FC, useMemo } from "react";
-import clsx from "clsx";
 import { Box, createStyles, Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import React, { FC, useMemo } from "react";
 
 import PlainTable from "../../components/PlainTable";
-import { createProjectsData, createDetailsData } from "./helpers/create-data";
 import { TableColumn } from "../../components/PlainTable/state/types";
+// import { DASHBOARD_ROUTES } from "../../routes/constants";
+// import { isRoute } from "../../utils";
+import { createDetailsData, createProjectsData } from "./helpers/create-data";
 import { DetailsData, ProjectData } from "./state/types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -136,19 +138,24 @@ export const Dashboard: FC = () => {
   );
 
   return (
-    <Box display="flex" flexWrap="wrap" className={classes.root}>
-      <Grid item xs={12} md={8}>
-        <PlainTable<ProjectData>
-          columns={projectsColumns}
-          rows={projectsData}
-          withMenu={true}
-          menuItems={["Open", "Edit", "Duplicate", "Download"]}
-        />
-      </Grid>
+    <>
+      <Box display="flex" flexWrap="wrap" className={classes.root}>
+        <Grid item xs={12} md={8}>
+          <PlainTable<ProjectData>
+            columns={projectsColumns}
+            rows={projectsData}
+            withMenu={true}
+            menuItems={["Open", "Edit", "Duplicate", "Download"]}
+          />
+        </Grid>
 
-      <Grid item xs={12} md={4}>
-        <PlainTable<DetailsData> columns={detailsColumns} rows={detailsData} />
-      </Grid>
-    </Box>
+        <Grid item xs={12} md={4}>
+          <PlainTable<DetailsData>
+            columns={detailsColumns}
+            rows={detailsData}
+          />
+        </Grid>
+      </Box>
+    </>
   );
 };

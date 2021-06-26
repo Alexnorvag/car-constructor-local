@@ -1,9 +1,8 @@
-import React, { FC } from "react";
 import { Box, createStyles, makeStyles } from "@material-ui/core";
-import { PublicRoutes, PrivateRoutes } from "../routes";
-import { useLocation } from "react-router-dom";
+import React, { FC } from "react";
 
-import { useWindowSize, useUserData, useOpen } from "../hooks";
+import { useOpen, useWindowSize } from "../hooks";
+import AuthenticatedRoutes from "../routes/components/AuthenticatedRoutes";
 import Layout from "./Layout";
 import AppContainer from "./LayoutContainer";
 
@@ -21,12 +20,7 @@ const useStyles = makeStyles(() =>
 const LayoutWrapper: FC = () => {
   const classes = useStyles();
   const windowSize = useWindowSize();
-  const location = useLocation();
-  const { email } = useUserData();
   const drawerControls = useOpen(!windowSize.isMinimizeDrawer);
-
-  console.log("location: ", location);
-  console.log("email: ", email);
 
   return (
     <Box className={classes.root}>
@@ -37,10 +31,7 @@ const LayoutWrapper: FC = () => {
       />
 
       <AppContainer open={drawerControls.opened}>
-        <Box>
-          <PublicRoutes />
-          <PrivateRoutes />
-        </Box>
+        <AuthenticatedRoutes />
       </AppContainer>
     </Box>
   );

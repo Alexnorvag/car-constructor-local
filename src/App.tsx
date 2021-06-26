@@ -1,16 +1,20 @@
 import { BrowserRouter as Router } from "react-router-dom";
-// import { PublicRoutes, PrivateRoutes } from "./routes";
 import { ThemeProvider } from "@material-ui/core/styles";
-// import { Page } from "./pages/Page";
-import theme from "./styles";
 
-import LayoutWrapper from "./layout/LayoutWrapper";
+import theme from "./styles";
+import RedirectContainer from "./layout/RedirectContainer";
+import { UserProvider } from "./context/user";
+import MainRoutes from "./routes/components/MainRoutes";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <LayoutWrapper />
+        <UserProvider>
+          <RedirectContainer>
+            <MainRoutes />
+          </RedirectContainer>
+        </UserProvider>
       </Router>
     </ThemeProvider>
   );

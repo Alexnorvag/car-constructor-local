@@ -1,15 +1,12 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import {
   createStyles,
   Drawer,
-  ListItem,
   ListItemAvatar,
   ListItemText,
   makeStyles,
   Theme,
-  Tooltip,
   List,
 } from "@material-ui/core";
 
@@ -24,10 +21,15 @@ import { EarthGlobeIcon } from "../assets/icons/EarthGlobeIcon";
 import { CameraIcon } from "../assets/icons/CameraIcon";
 import { MenuIcon } from "../assets/icons/MenuIcon";
 import { DashIcon } from "../assets/icons/DashIcon";
+import { HomeIcon } from "../assets/icons/HomeIcon";
 import { CommentAddIcon } from "../assets/icons/CommentAddIcon";
 import { CommentSpeechIcon } from "../assets/icons/CommentSpeechIcon";
 import { CommentRemoveIcon } from "../assets/icons/CommentRemoveIcon";
-import { HomeIcon } from "../assets/icons/HomeIcon";
+import Route from "../routes/types";
+import { isRoute } from "../utils";
+import { useUserData, useWindowSize } from "../hooks";
+import { DASHBOARD_ROUTES } from "../routes/constants";
+import LayoutSidebarItem from "./LayoutSidebarItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowY: "auto",
     },
     drawerOpen: {
-      width: DRAWER_WIDTH,
+      width: (isMobile) => (isMobile ? DRAWER_WIDTH_TOGGLED : DRAWER_WIDTH),
       borderRight: 0,
       boxShadow: "0px 2px 4px #00000054",
       transition: theme.transitions.create("width", {
@@ -59,12 +61,9 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.leavingScreen,
       }),
       width: DRAWER_WIDTH_TOGGLED,
-      "& $navListItem": {
-        padding: "16px 18px",
-        justifyContent: "center",
-      },
       "& $navListItemAvatar": {
-        marginRight: 0,
+        marginRight: (isMobile) => (isMobile ? "auto" : 0),
+        marginBottom: (isMobile) => (isMobile ? "-10px" : 0),
       },
       "& $navListItemText": {
         opacity: 0,
@@ -75,27 +74,26 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap",
     },
-    navListItem: {
-      padding: "16px 20px 16px 38px",
-      color: "#fff",
-      transition: theme.transitions.create("all"),
-      textTransform: "uppercase",
-    },
-    navListItemActive: {
-      color: "#000",
-    },
     navListItemAvatar: {
       width: 44,
       color: "#000",
       minWidth: "initial",
       display: "flex",
       alignItems: "center",
-      marginRight: 22,
-      transition: theme.transitions.create("margin-right"),
+      margin: (isMobile) => (isMobile ? "0 auto 0px auto" : "0 16px 0 0"),
+      transition: (isMobile) =>
+        theme.transitions.create(isMobile ? "margin-bottom" : "margin-right"),
     },
     navListItemText: {
       margin: 0,
-      transition: theme.transitions.create(["opacity", "flex"]),
+      fontSize: (isMobile) => (isMobile ? "0.65rem" : "inherit"),
+      transition: (isMobile) =>
+        theme.transitions.create(["opacity", ...(isMobile ? [] : ["flex"])]),
+    },
+    navListItemTextActive: {
+      "& > span": {
+        fontWeight: "bold",
+      },
     },
   })
 );
@@ -105,122 +103,93 @@ interface LayoutSidebarProps {
 }
 
 const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
-  const classes = useStyles();
+  const { isMobile } = useWindowSize();
+  const classes = useStyles(isMobile);
+  const { hasRoutePermissions } = useUserData();
 
-  // // dashboard pages
-  // const pages = [
-  //   {
-  //     label: "Garage",
-  //     icon: <SteeringWheelIcon />,
-  //     href: "/ds/review",
-  //     active: true,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Content",
-  //     icon: <ImageRoundedIcon />,
-  //     href: "/content",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "CDN",
-  //     icon: <EarthGlobeIcon />,
-  //     href: "/cdn",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "ROD",
-  //     icon: <CameraIcon />,
-  //     href: "/rod",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Menu",
-  //     icon: <MenuIcon />,
-  //     href: "/menu",
-  //     active: false,
-  //     visible: true,
-  //   },
-  // ];
+  const isCustomRoute = isRoute(DASHBOARD_ROUTES);
 
-  // const presentationPages = [
-  //   {
-  //     label: "Dash",
-  //     icon: <DashIcon />,
-  //     href: "/ds/review",
-  //     active: true,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Add",
-  //     icon: <CommentAddIcon />,
-  //     href: "/content",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Show",
-  //     icon: <CommentSpeechIcon />,
-  //     href: "/show",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Hide",
-  //     icon: <CommentRemoveIcon />,
-  //     href: "/hide",
-  //     active: false,
-  //     visible: true,
-  //   },
-  //   {
-  //     label: "Menu",
-  //     icon: <MenuIcon />,
-  //     href: "/menu",
-  //     active: false,
-  //     visible: true,
-  //   },
-  // ];
+  console.log("isCustomRoute: ", isCustomRoute);
+  console.log("DASHBOARD_ROUTES: ", DASHBOARD_ROUTES);
 
-  const galleryPages = [
+  const pages = [
     {
-      label: "Home",
+      label: "Garage",
+      icon: <SteeringWheelIcon />,
+      href: Route.REVIEW,
+      active: isRoute({ path: Route.REVIEW, exact: true }),
+      visible: hasRoutePermissions(Route.REVIEW) && !isRoute(Route.REVIEW),
+    },
+    {
+      label: "Gallery",
+      icon: <DashIcon />,
+      href: Route.REVIEW_GALLERY,
+      active: isRoute(Route.REVIEW_GALLERY),
+      visible:
+        hasRoutePermissions(Route.REVIEW) &&
+        isRoute(Route.REVIEW) &&
+        !isRoute({ path: Route.REVIEW_GALLERY, exact: true }),
+    },
+    {
+      label: "Presentation",
       icon: <HomeIcon />,
-      href: "/ds/review",
-      active: true,
-      visible: true,
+      href: Route.REVIEW_PRESENTATION,
+      active: isRoute(Route.REVIEW_PRESENTATION),
+      visible:
+        hasRoutePermissions(Route.REVIEW) &&
+        isRoute(Route.REVIEW) &&
+        !isRoute({ path: Route.REVIEW_PRESENTATION, exact: true }),
     },
     {
       label: "Add",
       icon: <CommentAddIcon />,
-      href: "/content",
+      onClick: () => console.log("Add handler"),
       active: false,
-      visible: true,
+      visible: hasRoutePermissions(Route.REVIEW) && isRoute(Route.REVIEW),
     },
     {
       label: "Show",
       icon: <CommentSpeechIcon />,
-      href: "/show",
+      onClick: () => console.log("Show handler"),
       active: false,
-      visible: true,
+      visible: hasRoutePermissions(Route.REVIEW) && isRoute(Route.REVIEW),
     },
     {
       label: "Hide",
       icon: <CommentRemoveIcon />,
-      href: "/hide",
+      onClick: () => console.log("Hide handler"),
       active: false,
-      visible: true,
+      visible: hasRoutePermissions(Route.REVIEW) && isRoute(Route.REVIEW),
+    },
+    {
+      label: "Content",
+      icon: <ImageRoundedIcon />,
+      href: Route.DASHBOARD_CONTENT,
+      active: isRoute(Route.DASHBOARD_CONTENT),
+      visible: hasRoutePermissions(Route.DASHBOARD) && !isRoute(Route.REVIEW),
+    },
+    {
+      label: "CDN",
+      icon: <EarthGlobeIcon />,
+      href: Route.DASHBOARD_CDN,
+      active: isRoute(Route.DASHBOARD_CDN),
+      visible: hasRoutePermissions(Route.DASHBOARD) && !isRoute(Route.REVIEW),
+    },
+    {
+      label: "ROD",
+      icon: <CameraIcon />,
+      href: Route.DASHBOARD_ROD,
+      active: isRoute(Route.DASHBOARD_ROD),
+      visible: hasRoutePermissions(Route.DASHBOARD) && !isRoute(Route.REVIEW),
     },
     {
       label: "Menu",
       icon: <MenuIcon />,
-      href: "/menu",
-      active: false,
-      visible: true,
+      href: Route.DASHBOARD,
+      active: isRoute({ path: Route.DASHBOARD, exact: true }),
+      visible: hasRoutePermissions(Route.DASHBOARD),
     },
-  ];
+  ].filter((item) => item.visible);
 
   return (
     <Drawer
@@ -238,28 +207,26 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
         component="nav"
         aria-label="application stack"
       >
-        {galleryPages.map((page) => (
-          // {presentationPages.map((page) => (
-          // {pages.map((page) => (
-          <Tooltip title={open ? "" : page.label} key={page.label}>
-            <ListItem
-              button
-              component={Link}
-              to={page.href}
-              key={page.label}
-              className={clsx(classes.navListItem, {
-                [classes.navListItemActive]: page.active,
+        {pages.map((page) => (
+          <LayoutSidebarItem
+            key={page.label}
+            open={open}
+            label={page.label}
+            active={page.active}
+            href={page.href}
+            onClick={page.onClick}
+          >
+            <ListItemAvatar className={classes.navListItemAvatar}>
+              {page.icon}
+            </ListItemAvatar>
+            <ListItemText
+              disableTypography={isMobile}
+              primary={page.label}
+              className={clsx(classes.navListItemText, {
+                [classes.navListItemTextActive]: page.active,
               })}
-            >
-              <ListItemAvatar className={classes.navListItemAvatar}>
-                {page.icon}
-              </ListItemAvatar>
-              <ListItemText
-                primary={page.label}
-                className={classes.navListItemText}
-              />
-            </ListItem>
-          </Tooltip>
+            />
+          </LayoutSidebarItem>
         ))}
       </List>
     </Drawer>

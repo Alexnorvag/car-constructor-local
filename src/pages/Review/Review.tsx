@@ -8,7 +8,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { FC, useEffect } from "react";
+import { FC } from "react";
+
 import { useHistory, useLocation } from "react-router-dom";
 import BlackCar from "../../assets/images/BlackCar.png";
 import BlueCar from "../../assets/images/BlueCar.png";
@@ -111,10 +112,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const views = {
-  presentation: "Presentation",
-  gallery: "Gallery",
-};
+// const views = {
+//   presentation: "Presentation",
+//   gallery: "Gallery",
+// };
 function createProjectNameData(projectName: string) {
   return { projectName };
 }
@@ -176,21 +177,21 @@ const tileData = [
 ];
 export const Review: FC = () => {
   const classes = useStyles();
-  const location = useLocation();
-  const history = useHistory();
-  const query = new URLSearchParams(location.search);
-  const view = query.get("view");
+  // const location = useLocation();
+  // const history = useHistory();
+  // const query = new URLSearchParams(location.search);
+  // const view = query.get("view");
 
-  useEffect(() => {
-    if (!view) {
-      const url = new URL(window.location.href);
-      url.search = "?view=presentation";
+  // useEffect(() => {
+  //   if (!view) {
+  //     const url = new URL(window.location.href);
+  //     url.search = "?view=presentation";
 
-      history.replace(url.pathname + url.search);
-    }
-  }, [history, location.pathname, location.search, view]);
+  //     history.replace(url.pathname + url.search);
+  //   }
+  // }, [history, location.pathname, location.search, view]);
 
-  console.log("views: ", views);
+  // console.log("views: ", views);
 
   return (
     <div>

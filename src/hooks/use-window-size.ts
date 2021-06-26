@@ -7,9 +7,9 @@ export const useWindowSize = () => {
     () => ({
       width: isClient ? window.innerWidth : undefined,
       height: isClient ? window.innerHeight : undefined,
-      isMobile: isClient ? window.innerHeight <= 480 : undefined,
-      isTablet: isClient ? window.innerHeight <= 768 : undefined,
-      isMinimizeDrawer: isClient ? window.innerHeight <= 1400 : undefined,
+      isMobile: isClient ? window.innerWidth <= 480 : undefined,
+      isTablet: isClient ? window.innerWidth <= 768 : undefined,
+      isMinimizeDrawer: isClient ? window.innerWidth <= 1400 : undefined,
     }),
     [isClient]
   );

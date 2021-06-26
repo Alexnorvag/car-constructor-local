@@ -1,6 +1,8 @@
 import { createStyles, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import React, { FC } from "react";
+
+import { useWindowSize } from "../hooks";
 import {
   APPBAR_HEIGHT,
   DRAWER_WIDTH,
@@ -41,9 +43,12 @@ interface LayoutContainerProps {
 
 const LayoutContainer: FC<LayoutContainerProps> = ({ open, children }) => {
   const classes = useStyles();
+  const { isMobile } = useWindowSize();
 
   return (
-    <main className={clsx(classes.root, { [classes.rootShift]: open })}>
+    <main
+      className={clsx(classes.root, { [classes.rootShift]: open && !isMobile })}
+    >
       <div className={classes.content}>{children}</div>
     </main>
   );
