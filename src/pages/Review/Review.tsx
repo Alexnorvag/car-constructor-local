@@ -10,7 +10,6 @@ import {
 import clsx from "clsx";
 import { FC } from "react";
 
-import { useHistory, useLocation } from "react-router-dom";
 import BlackCar from "../../assets/images/BlackCar.png";
 import BlueCar from "../../assets/images/BlueCar.png";
 import DarkGreyCar from "../../assets/images/DarkGreyCar.png";

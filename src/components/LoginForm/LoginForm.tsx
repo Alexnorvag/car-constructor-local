@@ -111,57 +111,57 @@ export const LoginForm: FC = () => {
 
     if (![email, password].some((v) => v.length)) return;
 
-    try {
-      const response: LoginUserResponse | unknown = await loginUser();
+    // try {
+    //   const response: LoginUserResponse | unknown = await loginUser();
 
-      if (response) {
-        const invalidCredentials =
-          process.env.REACT_APP_EMAIL !== email ||
-          process.env.REACT_APP_PASSWORD !== password;
+    //   if (response) {
+    //     const invalidCredentials =
+    //       process.env.REACT_APP_EMAIL !== email ||
+    //       process.env.REACT_APP_PASSWORD !== password;
 
-        if (invalidCredentials) {
-          setLoading(false);
+    //     if (invalidCredentials) {
+    //       setLoading(false);
 
-          return setFormState({
-            ...formState,
-            errors: {
-              ...formState.errors,
-              internalError: "Please enter Email and Password",
-            },
-          });
-        }
+    //       return setFormState({
+    //         ...formState,
+    //         errors: {
+    //           ...formState.errors,
+    //           internalError: "Please enter Email and Password",
+    //         },
+    //       });
+    //     }
 
-        setLoading(false);
+    //     setLoading(false);
 
-        const {
-          data: {
-            user_profile: { firstname, lastname, avatar, username },
-          },
-        } = JSON.parse(response as string);
+    //     const {
+    //       data: {
+    //         user_profile: { firstname, lastname, avatar, username },
+    //       },
+    //     } = JSON.parse(response as string);
 
-        user.setUserData({
-          email,
-          homeUrl: "/",
-          firstname,
-          lastname,
-          avatar,
-          username,
-          permissions: ["/ds", "/review"],
-        });
-      }
-    } catch (error) {
-      console.error(error);
+    //     user.setUserData({
+    //       email,
+    //       homeUrl: "/",
+    //       firstname,
+    //       lastname,
+    //       avatar,
+    //       username,
+    //       permissions: ["/ds", "/review"],
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error(error);
 
-      setLoading(false);
+    //   setLoading(false);
 
-      setFormState({
-        ...formState,
-        errors: {
-          ...formState.errors,
-          internalError: "Please enter Email and Password",
-        },
-      });
-    }
+    //   setFormState({
+    //     ...formState,
+    //     errors: {
+    //       ...formState.errors,
+    //       internalError: "Please enter Email and Password",
+    //     },
+    //   });
+    // }
   };
 
   return (

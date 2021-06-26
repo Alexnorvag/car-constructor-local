@@ -2,27 +2,20 @@ import { FC } from "react";
 
 interface HomeIconProps {
   fill?: string;
+  className?: string;
 }
 
-export const HomeIcon: FC<HomeIconProps> = ({ fill }) => {
+export const HomeIcon: FC<HomeIconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="65.5"
       height="65.5"
       viewBox="0 0 65.5 65.5"
-      fill={fill}
+      {...props}
     >
-      <g
-        id="Group_859"
-        data-name="Group 859"
-        transform="translate(-20 -224)"
-      >
-        <g
-          id="Group_858"
-          data-name="Group 858"
-          transform="translate(0 -499)"
-        >
+      <g id="Group_859" data-name="Group 859" transform="translate(-20 -224)">
+        <g id="Group_858" data-name="Group 858" transform="translate(0 -499)">
           <path
             id="contour_615"
             data-name="contour 615"
