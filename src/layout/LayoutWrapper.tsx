@@ -1,10 +1,10 @@
 import { Box, createStyles, makeStyles } from "@material-ui/core";
 import React, { FC } from "react";
 
-import { useOpen, useWindowSize } from "../hooks";
-import AuthenticatedRoutes from "../routes/components/AuthenticatedRoutes";
 import Layout from "./Layout";
 import AppContainer from "./LayoutContainer";
+import AuthenticatedRoutes from "../routes/components/AuthenticatedRoutes";
+import { useOpen } from "../hooks";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -19,8 +19,7 @@ const useStyles = makeStyles(() =>
 
 const LayoutWrapper: FC = () => {
   const classes = useStyles();
-  const windowSize = useWindowSize();
-  const drawerControls = useOpen(!windowSize.isMinimizeDrawer);
+  const drawerControls = useOpen(false);
 
   return (
     <Box className={classes.root}>
