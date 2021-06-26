@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 
 import { loginUser, LoginUserResponse } from "../../../api/loginUser";
 import { UserContext } from "../../../context/user";
@@ -11,21 +11,36 @@ const useLoginData = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const validation = useMemo(() => {
+    if (!email || !password)
+      return { error: "Please enter Email and Password" };
+
+    if (email && !email.includes("@")) return { error: "Invalid Email" };
+
+    if (password && password.length < 6)
+      return { error: "Password should be 6 symbols at least" };
+
+    return { error: null };
+  }, [email, password]);
+
   const login = useCallback(
     async (email: string, password: string) => {
+      if (validation.error) {
+        setError(validation.error);
+        return;
+      }
+
       setLoading(true);
-      setError(null);
 
       const response: LoginUserResponse | unknown = await loginUser({
         email,
         password,
       });
-
       const { data, error: resError } = JSON.parse(response as string);
-      console.log("data: ", data);
-      console.log("error: ", resError);
+
       setError(resError);
       setLoading(false);
+
       if (!data) return;
 
       const {
@@ -43,7 +58,7 @@ const useLoginData = () => {
         permissions,
       });
     },
-    [setUserData]
+    [setUserData, validation]
   );
 
   const toggleIsPasswordShown = useCallback(

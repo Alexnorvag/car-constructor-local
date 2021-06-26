@@ -27,7 +27,11 @@ export const loginUser = ({
         process.env.REACT_APP_PASSWORD !== password;
 
       if (invalidCredentials) {
-        resolve(JSON.stringify({ error: "Please enter Email and Password" }));
+        resolve(
+          JSON.stringify({
+            error: "Email or Password does not exist. Please, try again.",
+          })
+        );
       }
 
       resolve(
