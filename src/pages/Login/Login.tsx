@@ -14,13 +14,17 @@ import {
   AuthContainerInputProps,
 } from "../../components/AuthContainer/state/types";
 import Route from "../../routes/types";
+import { makeStyles, Box } from "@material-ui/core";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import LoginForm from "../../components/LoginForm";
 
-// const useStyles = makeStyles({
-//   root: {
-//     background: "#000",
-//     minHeight: "100vh",
-//   },
-// });
+const useStyles = makeStyles({
+  root: {
+    background: "#000",
+    minHeight: "100vh",
+  },
+});
 
 const footer = {
   link: Route.ABOUT,
@@ -28,6 +32,7 @@ const footer = {
 };
 
 export const Login: FC = () => {
+  const classes = useStyles();
   const {
     email,
     password,
@@ -82,25 +87,27 @@ export const Login: FC = () => {
   }, [reset]);
 
   return (
-    <AuthContainer
-      error={error}
-      loading={loading}
-      loadingText="Checking credentials"
-      footer={footer}
-      inputs={inputs}
-      buttons={buttons}
-      onSubmit={handleSubmit}
-      description={
-        <>
-          <span>Welcome back!</span>
-          <span>Log in to proceed to car-constructor</span>
-        </>
-      }
-    />
-    // <Box className={classes.root} display="flex" flexDirection="column">
-    //   <Header />
-    //   <LoginForm />
-    //   <Footer />
-    // </Box>
+    <>
+      <AuthContainer
+        error={error}
+        loading={loading}
+        loadingText="Checking credentials"
+        footer={footer}
+        inputs={inputs}
+        buttons={buttons}
+        onSubmit={handleSubmit}
+        description={
+          <>
+            <span>Welcome back!</span>
+            <span>Log in to proceed to car-constructor</span>
+          </>
+        }
+      />
+      <Box className={classes.root} display="flex" flexDirection="column">
+        <Header />
+        <LoginForm />
+        <Footer />
+      </Box>
+    </>
   );
 };

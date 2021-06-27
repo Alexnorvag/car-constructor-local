@@ -1,4 +1,4 @@
-import { CircularProgress, makeStyles, Paper, Theme } from "@material-ui/core";
+import { Box, CircularProgress, makeStyles, Theme } from "@material-ui/core";
 import createStyles from "@material-ui/styles/createStyles";
 import React, { FC, FormEvent, ReactNode } from "react";
 import CheckIcon from "@material-ui/icons/CheckCircleOutlineRounded";
@@ -13,29 +13,30 @@ import {
 import { HomeIcon } from "../../assets/icons/HomeIcon";
 import AuthContainerFormInputs from "./components/AuthContainerFormInputs";
 import AuthContainerFormButtons from "./components/AuthContainerFormButtons";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
+      background: "#000",
       width: "100%",
       height: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
     },
     root: {
       display: "flex",
       width: "min(582px, 95%)",
-      height: "min(95vh, 612px)",
-      padding: "58px 0",
+      height: "min(70vh, 512px)",
+      // padding: "58px 0",
       alignItems: "center",
       flexDirection: "column",
       color: theme.palette.primary.main,
       position: "relative",
-      borderRadius: 8,
+      background: "white",
+      // borderRadius: 8,
       [theme.breakpoints.down(480)]: {
         justifyContent: "center",
-        padding: "40px 0",
+        // padding: "40px 0",
       },
     },
     content: {
@@ -190,73 +191,86 @@ const AuthContainer: FC<AuthContainerProps> = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.wrapper}>
-      <Paper className={classes.root} elevation={8}>
-        <div className={classes.content}>
-          <div className={classes.header}>
-            <div className={classes.titleWrapper}>
-              <span className={classes.title}>ATOM</span>
-              <HomeIcon className={classes.titleIcon} />
+    <Box display="flex" flexDirection="column" className={classes.wrapper}>
+      <Header />
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+      >
+        <Box className={classes.root}>
+          <div className={classes.content}>
+            <div className={classes.header}>
+              <div className={classes.titleWrapper}>
+                <span className={classes.title}>Car Constructor</span>
+                <HomeIcon className={classes.titleIcon} />
+              </div>
+
+              <div className={classes.poweredBy}>
+                <span>Powered By</span>
+                <span>Life-Co</span>
+              </div>
+
+              <div className={classes.description}>
+                <div className={classes.welcomeBack}>{description}</div>
+
+                <span
+                  className={clsx(classes.error, {
+                    [classes.errorVisible]: error,
+                  })}
+                >
+                  {error}
+                </span>
+              </div>
             </div>
 
-            <div className={classes.poweredBy}>
-              <span>Powered By</span>
-              <span>Life-Co</span>
-            </div>
-
-            <div className={classes.description}>
-              <div className={classes.welcomeBack}>{description}</div>
-
-              <span
-                className={clsx(classes.error, {
-                  [classes.errorVisible]: error,
+            <div className={classes.formWrapper}>
+              <div
+                className={clsx(classes.formOverlay, {
+                  [classes.hidden]: !loading,
                 })}
               >
-                {error}
-              </span>
-            </div>
-          </div>
+                <div className={classes.formOverlayContent}>
+                  <CircularProgress />
+                  <span>{loadingText}</span>
+                </div>
+              </div>
 
-          <div className={classes.formWrapper}>
-            <div
-              className={clsx(classes.formOverlay, {
-                [classes.hidden]: !loading,
-              })}
-            >
-              <div className={classes.formOverlayContent}>
-                <CircularProgress />
-                <span>{loadingText}</span>
+              <div
+                className={clsx(
+                  classes.formOverlay,
+                  classes.formOverlaySuccess,
+                  {
+                    [classes.hidden]: !successText,
+                  }
+                )}
+              >
+                <div className={classes.formOverlayContent}>
+                  <CheckIcon className={classes.checkIcon} />
+                  <span>{successText}</span>
+                </div>
+              </div>
+
+              <div className={classes.formContainer}>
+                {(inputs || buttons) && (
+                  <form className={classes.form} onSubmit={onSubmit}>
+                    {inputs && (
+                      <AuthContainerFormInputs
+                        inputs={inputs}
+                        spacing={inputSpacing}
+                      />
+                    )}
+                    {buttons && <AuthContainerFormButtons buttons={buttons} />}
+                  </form>
+                )}
               </div>
             </div>
-
-            <div
-              className={clsx(classes.formOverlay, classes.formOverlaySuccess, {
-                [classes.hidden]: !successText,
-              })}
-            >
-              <div className={classes.formOverlayContent}>
-                <CheckIcon className={classes.checkIcon} />
-                <span>{successText}</span>
-              </div>
-            </div>
-
-            <div className={classes.formContainer}>
-              {(inputs || buttons) && (
-                <form className={classes.form} onSubmit={onSubmit}>
-                  {inputs && (
-                    <AuthContainerFormInputs
-                      inputs={inputs}
-                      spacing={inputSpacing}
-                    />
-                  )}
-                  {buttons && <AuthContainerFormButtons buttons={buttons} />}
-                </form>
-              )}
-            </div>
           </div>
-        </div>
-      </Paper>
-    </div>
+        </Box>
+      </Box>
+      <Footer />
+    </Box>
   );
 };
 

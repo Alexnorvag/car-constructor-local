@@ -67,9 +67,8 @@ const AuthContainerInput: FC<AuthContainerInputProps> = ({
   return (
     <TextField
       required
-      color="primary"
       variant="outlined"
-      placeholder="Input text"
+      color="secondary"
       id={id}
       label={label}
       autoComplete={autoComplete}
@@ -95,7 +94,7 @@ const AuthContainerInput: FC<AuthContainerInputProps> = ({
           ),
       }}
       InputLabelProps={{
-        shrink: true,
+        // shrink: true,
         classes: {
           root: classes.inputLabel,
           focused: classes.inputLabelActive,
