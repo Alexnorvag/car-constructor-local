@@ -10,16 +10,17 @@ import { ChangeEvent, FC, useCallback } from "react";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
+import { FormInput } from "../../common/FormInput";
 import { AuthContainerInputProps } from "../state/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    inputLabel: {
-      color: "#747C83",
-    },
-    inputLabelActive: {
-      color: theme.palette.primary.main,
-    },
+    // inputLabel: {
+    //   color: "#747C83",
+    // },
+    // inputLabelActive: {
+    //   color: theme.palette.primary.main,
+    // },
     textField: {
       width: "100%",
       marginBottom: 40,
@@ -31,13 +32,19 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     input: {
-      color: theme.palette.primary.main,
+      color: '#ff1122',
+      // color: theme.palette.primary.main,
       [theme.breakpoints.down(480)]: {
         fontSize: 14,
       },
+      "&:-internal-autofill-selected": {
+        backgroundColor: 'transparent !important'
+        // WebkitBoxShadow: "0 0 0 1000px white inset"
+      }
     },
     icon: {
-      color: "#BDC3C7",
+      color: theme.palette.common.white,
+      // color: "#BDC3C7",
     },
   })
 );
@@ -65,7 +72,7 @@ const AuthContainerInput: FC<AuthContainerInputProps> = ({
   const handleToggle = useCallback(() => onToggle?.(), [onToggle]);
 
   return (
-    <TextField
+    <FormInput
       required
       variant="outlined"
       color="secondary"
@@ -96,8 +103,8 @@ const AuthContainerInput: FC<AuthContainerInputProps> = ({
       InputLabelProps={{
         // shrink: true,
         classes: {
-          root: classes.inputLabel,
-          focused: classes.inputLabelActive,
+          // root: classes.inputLabel,
+          // focused: classes.inputLabelActive,
         },
       }}
     />

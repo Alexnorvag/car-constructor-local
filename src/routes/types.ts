@@ -3,12 +3,13 @@ enum Route {
 
   LOGIN = "/login",
   ABOUT = "/about",
+  SIGNUP = "/signup",
+  FORGOT = "/forgot",
 
   DASHBOARD = "/ds",
   DASHBOARD_CONTENT = "/ds/content",
   DASHBOARD_CDN = "/ds/cdn",
   DASHBOARD_ROD = "/ds/rod",
-  // DASHBOARD_REVIEW = "/ds/review",
 
   REVIEW = "/review",
   REVIEW_PRESENTATION = "/review/presentation",

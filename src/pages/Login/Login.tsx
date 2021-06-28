@@ -18,6 +18,8 @@ import { makeStyles, Box } from "@material-ui/core";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import LoginForm from "../../components/LoginForm";
+import { SendIcon } from "../../assets/icons/SendIcon";
+import { UserAddIcon } from "../../assets/icons/UserAddIcon";
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 const footer = {
-  link: Route.ABOUT,
+  link: Route.FORGOT,
   linkText: "Forgot Password?",
 };
 
@@ -67,11 +69,20 @@ export const Login: FC = () => {
   ];
 
   const buttons: AuthContainerButtonProps[] = [
-    { primary: true, id: "submit", type: "submit", text: "LOG IN" },
+    // { link: Route.SIGNUP, icon: <UserAddIcon />, text: "sign up" },
+    {
+      primary: true,
+      id: "submit",
+      type: "submit",
+      link: Route.LOGIN,
+      // icon: <SendIcon />,
+      text: "log in",
+    },
   ];
 
   const handleSubmit = useCallback(
     (e: FormEvent) => {
+      console.log('fqwkfpoqwkfopqwof')
       e.preventDefault();
       if (!email || !password) return;
 
@@ -96,6 +107,7 @@ export const Login: FC = () => {
         inputs={inputs}
         buttons={buttons}
         onSubmit={handleSubmit}
+        inputSpacing={15}
         description={
           <>
             <span>Welcome back!</span>
@@ -103,11 +115,11 @@ export const Login: FC = () => {
           </>
         }
       />
-      <Box className={classes.root} display="flex" flexDirection="column">
+      {/* <Box className={classes.root} display="flex" flexDirection="column">
         <Header />
         <LoginForm />
         <Footer />
-      </Box>
+      </Box> */}
     </>
   );
 };

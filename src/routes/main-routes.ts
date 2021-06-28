@@ -11,6 +11,14 @@ const mainRoutes: RouteProps[] = [
     component: LoginPage,
   },
   {
+    path: Route.SIGNUP,
+    component: LoginPage,
+  },
+  {
+    path: Route.FORGOT,
+    component: LoginPage,
+  },
+  {
     path: Route.ABOUT,
     component: AboutPage,
   },

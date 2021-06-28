@@ -2,8 +2,9 @@ import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useCallback, useState } from "react";
+
 import { SendIcon } from "../../assets/icons/SendIcon";
-import FormInput from "../FormInput";
+import { FormInput } from "../common/FormInput";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

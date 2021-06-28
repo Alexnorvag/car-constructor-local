@@ -19,9 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 0,
     },
     menuContainer: {
-      background: "#929497",
+      background: theme.palette.primary.main,
       borderRadius: "unset",
-      border: "2px solid #fff",
+      border: "2px solid",
+      borderColor: theme.palette.primary.light,
       paddingBlock: theme.spacing(2),
       minWidth: "160px",
     },
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     menuItem: {
       fontSize: "16px",
       textTransform: "uppercase",
-      color: "#fff",
+      color: theme.palette.primary.light,
       lineHeight: "28px",
       paddingInline: theme.spacing(2),
     },

@@ -206,6 +206,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
         className={classes.navList}
         component="nav"
         aria-label="application stack"
+        disablePadding
       >
         {pages.map((page) => (
           <LayoutSidebarItem

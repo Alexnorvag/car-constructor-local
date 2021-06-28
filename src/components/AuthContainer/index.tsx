@@ -1,8 +1,15 @@
-import { Box, CircularProgress, makeStyles, Theme } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
 import createStyles from "@material-ui/styles/createStyles";
 import React, { FC, FormEvent, ReactNode } from "react";
 import CheckIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 import Route from "../../routes/types";
 // import Footer from "../Footer";
@@ -30,9 +37,10 @@ const useStyles = makeStyles((theme: Theme) =>
       // padding: "58px 0",
       alignItems: "center",
       flexDirection: "column",
-      color: theme.palette.primary.main,
+      color: theme.palette.common.white,
       position: "relative",
-      background: "white",
+      border: "2px solid red",
+      // background: "white",
       // borderRadius: 8,
       [theme.breakpoints.down(480)]: {
         justifyContent: "center",
@@ -53,7 +61,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
-      marginBottom: 20,
     },
     titleWrapper: {
       display: "flex",
@@ -65,6 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
     titleIcon: {
       width: 30,
       height: "auto",
+      fill: theme.palette.common.white,
     },
     poweredBy: {
       display: "flex",
@@ -92,12 +100,12 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       textAlign: "center",
-      color: "#747C83",
+      color: theme.palette.primary.main,
     },
     error: {
       height: 19,
       marginTop: 10,
-      color: "#900",
+      color: theme.palette.error.dark,
       opacity: 0,
       transition: "opacity .1s ease",
     },
@@ -111,7 +119,6 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "relative",
       width: "min(328px, 100%)",
       height: "100%",
-      marginBottom: 20,
     },
     formOverlay: {
       top: -5,
@@ -153,6 +160,22 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     checkIcon: {
       fontSize: 60,
+    },
+    footer: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      "& > span": {
+        marginRight: 5,
+      },
+    },
+    footerLink: {
+      transition: "color .1s ease",
+      textDecoration: "none",
+      color: theme.palette.primary.light,
+      "&:hover": {
+        color: theme.palette.primary.main,
+      },
     },
   })
 );
@@ -212,7 +235,7 @@ const AuthContainer: FC<AuthContainerProps> = ({
                 <span>Life-Co</span>
               </div>
 
-              <div className={classes.description}>
+              <Box className={classes.description}>
                 <div className={classes.welcomeBack}>{description}</div>
 
                 <span
@@ -222,10 +245,10 @@ const AuthContainer: FC<AuthContainerProps> = ({
                 >
                   {error}
                 </span>
-              </div>
+              </Box>
             </div>
 
-            <div className={classes.formWrapper}>
+            <Box justifyContent="center" className={classes.formWrapper}>
               <div
                 className={clsx(classes.formOverlay, {
                   [classes.hidden]: !loading,
@@ -255,6 +278,9 @@ const AuthContainer: FC<AuthContainerProps> = ({
               <div className={classes.formContainer}>
                 {(inputs || buttons) && (
                   <form className={classes.form} onSubmit={onSubmit}>
+                    <Box>
+                      <Button type="submit">TEST</Button>
+                    </Box>
                     {inputs && (
                       <AuthContainerFormInputs
                         inputs={inputs}
@@ -265,6 +291,13 @@ const AuthContainer: FC<AuthContainerProps> = ({
                   </form>
                 )}
               </div>
+            </Box>
+
+            <div className={classes.footer}>
+              {footer.text && <span>{footer.text}</span>}
+              <Link to={footer.link} className={classes.footerLink}>
+                {footer.linkText}
+              </Link>
             </div>
           </div>
         </Box>

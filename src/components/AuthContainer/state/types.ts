@@ -18,4 +18,5 @@ export interface AuthContainerButtonProps {
   type?: string;
   text: string;
   link?: Route;
+  icon?: JSX.Element;
 }

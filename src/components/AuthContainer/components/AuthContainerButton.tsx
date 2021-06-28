@@ -51,6 +51,12 @@ const AuthContainerFormButton: FC<AuthContainerButtonProps> = ({
 }) => {
   const classes = useStyles();
 
+  console.log('link: ', link);
+  console.log('text: ', text);
+  console.log('type: ', type);
+  console.log('id: ', id);
+  
+
   return (
     <Button
       size="small"
