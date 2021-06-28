@@ -278,9 +278,6 @@ const AuthContainer: FC<AuthContainerProps> = ({
               <div className={classes.formContainer}>
                 {(inputs || buttons) && (
                   <form className={classes.form} onSubmit={onSubmit}>
-                    <Box>
-                      <Button type="submit">TEST</Button>
-                    </Box>
                     {inputs && (
                       <AuthContainerFormInputs
                         inputs={inputs}

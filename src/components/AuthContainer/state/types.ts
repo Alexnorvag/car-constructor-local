@@ -15,7 +15,7 @@ export interface AuthContainerInputProps {
 export interface AuthContainerButtonProps {
   primary?: boolean;
   id?: string;
-  type?: string;
+  type?: "button" | "reset" | "submit";
   text: string;
   link?: Route;
   icon?: JSX.Element;

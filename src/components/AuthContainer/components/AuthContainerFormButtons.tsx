@@ -1,5 +1,4 @@
 import { Box } from "@material-ui/core";
-import { FC } from "react";
 
 import { AuthContainerButtonProps } from "../state/types";
 import AuthContainerFormButton from "./AuthContainerButton";
@@ -9,25 +8,22 @@ interface AuthContainerFormButtonsProps {
   buttons: AuthContainerButtonProps[];
 }
 
-const AuthContainerFormButtons: FC<AuthContainerFormButtonsProps> = ({
+const AuthContainerFormButtons = ({
   buttons,
-}) => {
+}: AuthContainerFormButtonsProps) => {
   return (
-    <div>
-      {/* <Box display="flex" justifyContent="space-evenly"> */}
-      {buttons.map((buttonProps) => {
-        console.log("buttonProps: ", buttonProps);
-
-        return buttonProps.icon ? (
+    <Box display="flex" justifyContent="space-evenly">
+      {buttons.map((buttonProps) =>
+        buttonProps.icon ? (
           <AuthContainerFormIconButton
             key={buttonProps.text}
             {...buttonProps}
           />
         ) : (
           <AuthContainerFormButton key={buttonProps.text} {...buttonProps} />
-        );
-      })}
-    </div>
+        )
+      )}
+    </Box>
   );
 };
 

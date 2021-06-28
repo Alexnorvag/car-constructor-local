@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button as ButtonMUI } from "@material-ui/core";
+import { Button as ButtonMUI, ButtonProps } from "@material-ui/core";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme) =>
@@ -36,7 +36,15 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+interface ButtonMUIProps extends ButtonProps {
+  active?: boolean;
+  primary?: boolean;
+  component: any;
+  to?: string;
+}
+
 const Button = (props: any) => {
+// const Button = (props: ButtonMUIProps) => {
   const {
     className,
     active,

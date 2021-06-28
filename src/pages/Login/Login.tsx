@@ -69,20 +69,19 @@ export const Login: FC = () => {
   ];
 
   const buttons: AuthContainerButtonProps[] = [
-    // { link: Route.SIGNUP, icon: <UserAddIcon />, text: "sign up" },
+    { link: Route.SIGNUP, icon: <UserAddIcon />, text: "sign up" },
     {
       primary: true,
       id: "submit",
       type: "submit",
-      link: Route.LOGIN,
-      // icon: <SendIcon />,
+      icon: <SendIcon />,
       text: "log in",
     },
   ];
 
   const handleSubmit = useCallback(
     (e: FormEvent) => {
-      console.log('fqwkfpoqwkfopqwof')
+      console.log("fqwkfpoqwkfopqwof");
       e.preventDefault();
       if (!email || !password) return;
 

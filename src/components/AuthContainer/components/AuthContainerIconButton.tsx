@@ -62,14 +62,17 @@ const AuthContainerFormIconButton: FC<any> = ({
   primary,
 }) => {
   const classes = useStyles();
-
+  const component = {
+    ...(link ? { component: Link, to: link } : {}),
+  };
+  console.log("component: ", component);
   return (
-    <Button
+    <IconButton
       id={id}
-      type='submit'
-    //   type={type}
-      component={Link}
-      to={link ?? undefined}
+      type={type}
+      // component={link ? Link : undefined}
+      // to={link ?? undefined}
+      {...component}
       className={clsx(
         classes.button,
         primary ? classes.primary : classes.secondary
@@ -79,7 +82,7 @@ const AuthContainerFormIconButton: FC<any> = ({
     >
       <Typography variant="button">{text}</Typography>
       {icon}
-    </Button>
+    </IconButton>
   );
 };
 
