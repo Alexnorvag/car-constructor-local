@@ -23,8 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      color: "#929497",
-      border: "2px solid #929497",
+      color: theme.palette.primary.main,
+      border: "2px solid",
+      borderColor: theme.palette.primary.main,
       marginInline: "min(-2vw, -12px)",
       marginTop: -25,
     },
@@ -66,14 +67,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     activeButton: {
       color: "#000 !important",
-      backgroundColor: "#929497",
+      backgroundColor: theme.palette.primary.main,
       "&:hover": {
         backgroundColor: "#717273",
       },
     },
     button: {
       width: "100%",
-      color: "#929497",
+      color: theme.palette.primary.main,
       borderRadius: 0,
       paddingInline: 45,
       fontSize: "medium",
@@ -106,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "auto",
     },
     gridContainer: {
-      color: "#929497",
+      color: theme.palette.primary.main,
       textTransform: "uppercase",
     },
   })

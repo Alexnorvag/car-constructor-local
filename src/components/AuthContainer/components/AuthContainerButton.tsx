@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) =>
     secondary: {
       width: "100%",
       background: "#99C2E5",
-      color: "#fff",
+      color:theme.palette.secondary.light,
       "&:hover": {
         background: "#324D66",
       },
