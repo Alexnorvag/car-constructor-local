@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) =>
     content: {
       paddingTop: 25,
       paddingBottom: 30,
+      height:"100%",
     },
   })
 );
