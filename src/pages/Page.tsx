@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     // minWidth: "100vw",
   },
   toolBar: {
-    color: "#929497",
+    color: theme.palette.primary.main,
   },
   headerBox: {
     margin: "45px 100px 30px 6px",

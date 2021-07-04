@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) =>
     appBarToolbar: {
       minHeight: APPBAR_HEIGHT,
       paddingLeft: 22,
-      color: "#929497",
+      color: theme.palette.primary.main,
       justifyContent: 'space-between'
     },
     appBarControls: { display: "flex", alignItems: "center" },
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) =>
       display: "none",
     },
     icon: {
-      color: "#929497",
+      color: theme.palette.primary.main,
       transition: theme.transitions.create("color"),
       "&:hover": {
         color: theme.palette.secondary.light,

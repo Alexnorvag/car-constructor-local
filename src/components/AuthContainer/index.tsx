@@ -25,7 +25,7 @@ import Footer from "../Footer";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
-      background: "#000",
+      background: theme.palette.primary.dark,
       width: "100%",
       height: "100vh",
     },
@@ -123,7 +123,7 @@ const useStyles = makeStyles((theme: Theme) =>
       left: -3,
       width: "calc(100% + 6px)",
       height: "calc(100% + 10px)",
-      backgroundColor: "#fff",
+      backgroundColor: theme.palette.secondary.light,
       position: "absolute",
       zIndex: 10,
     },

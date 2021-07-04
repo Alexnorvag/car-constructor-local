@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
       borderColor: theme.palette.primary.main,
     },
     cell: {
-      color: "#fff",
+      color: theme.palette.secondary.light,
       fontSize: 16,
       lineHeight: "28px",
       height: "30px",
       whiteSpace: "nowrap",
     },
     cellTh: {
-      color: "#929497",
+      color: theme.palette.primary.main,
       textTransform: "uppercase",
     },
     emptyCell: {

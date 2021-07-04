@@ -21,12 +21,12 @@ import LoginForm from "../../components/LoginForm";
 import { SendIcon } from "../../assets/icons/SendIcon";
 import { UserAddIcon } from "../../assets/icons/UserAddIcon";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    background: "#000",
+    background: theme.palette.primary.dark,
     minHeight: "100vh",
   },
-});
+}));
 
 const footer = {
   link: Route.FORGOT,

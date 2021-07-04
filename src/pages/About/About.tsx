@@ -2,13 +2,13 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import { FC } from "react";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) =>({
   root: {
-    background: "#000",
+    background:theme.palette.primary.dark ,
     minHeight: "100vh",
-    color: "#fff",
+    color:theme.palette.secondary.light,
   },
-});
+}));
 
 export const About: FC = () => {
   const classes = useStyles();

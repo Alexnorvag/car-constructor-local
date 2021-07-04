@@ -6,7 +6,7 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      background: "#fff",
+      background: theme.palette.secondary.light,
       minWidth: 80,
       boxShadow: "0px 1px 3px rgba(0, 0, 0, #d2d2d2)",
       borderRadius: 4,
