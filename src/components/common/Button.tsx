@@ -1,12 +1,12 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button as ButtonMUI } from "@material-ui/core";
+import { Button as ButtonMUI, ButtonProps } from "@material-ui/core";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      background: "#fff",
+      background: theme.palette.secondary.light,
       minWidth: 80,
       boxShadow: "0px 1px 3px rgba(0, 0, 0, #d2d2d2)",
       borderRadius: 4,
@@ -36,7 +36,15 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+interface ButtonMUIProps extends ButtonProps {
+  active?: boolean;
+  primary?: boolean;
+  component: any;
+  to?: string;
+}
+
 const Button = (props: any) => {
+// const Button = (props: ButtonMUIProps) => {
   const {
     className,
     active,

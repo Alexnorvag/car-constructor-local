@@ -1,11 +1,10 @@
 import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, useCallback, useContext, useState } from "react";
-import { loginUser, LoginUserResponse } from "../../api/loginUser";
+import { FC, useCallback, useState } from "react";
+
 import { SendIcon } from "../../assets/icons/SendIcon";
-import { UserContext } from "../../context/user";
-import FormInput from "../FormInput";
+import { FormInput } from "../common/FormInput";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -47,7 +46,6 @@ export const LoginForm: FC = () => {
       internalError: "",
     },
   });
-  const user = useContext(UserContext);
 
   const {
     email,

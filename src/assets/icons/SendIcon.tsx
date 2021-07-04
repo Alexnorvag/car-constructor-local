@@ -16,8 +16,6 @@ export const SendIcon: FC<SendIconProps> = ({ fill }) => {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="41"
-        height="36"
         viewBox="0.555 0.444 39.445 35.399"
       >
         <path

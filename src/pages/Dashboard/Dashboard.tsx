@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     cellActive: {
-      color: "#055AFC",
+      color: theme.palette.primary.contrastText,
     },
   })
 );

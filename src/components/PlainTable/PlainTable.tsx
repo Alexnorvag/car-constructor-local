@@ -16,20 +16,21 @@ import EnhancedTableContainer from "./EnhancedTableContainer";
 import { getCellValue } from "./helpers/cell-formatter";
 import { TableColumn } from "./state/types";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     head: {
-      border: "2px solid #929497",
+      border: "2px solid",
+      borderColor: theme.palette.primary.main,
     },
     cell: {
-      color: "#fff",
+      color: theme.palette.secondary.light,
       fontSize: 16,
       lineHeight: "28px",
       height: "30px",
       whiteSpace: "nowrap",
     },
     cellTh: {
-      color: "#929497",
+      color: theme.palette.primary.main,
       textTransform: "uppercase",
     },
     emptyCell: {

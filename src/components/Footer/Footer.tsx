@@ -1,14 +1,29 @@
 import { FC } from "react";
-import Box from "@material-ui/core/Box";
+import { Box, createStyles, makeStyles, useTheme } from "@material-ui/core";
+
 import FooterNavigation from "../FooterNavigation";
 import TimeSpan from "../TimeSpan";
-import { useTheme } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      paddingInline: theme.spacing(8),
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(4),
+      [theme.breakpoints.down("xs")]: {
+        paddingInline: theme.spacing(1),
+        paddingBlock: theme.spacing(2),
+      },
+    },
+  })
+);
 
 export const Footer: FC = () => {
   const theme = useTheme();
+  const classes = useStyles();
 
   return (
-    <Box pt={2} pb={8} px={8} display="flex" justifyContent="space-between">
+    <Box className={classes.root} display="flex" justifyContent="space-between">
       <FooterNavigation />
       <Box display="flex">
         <Box color={theme.palette.common.white} mr={8}>

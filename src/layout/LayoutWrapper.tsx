@@ -6,12 +6,12 @@ import AppContainer from "./LayoutContainer";
 import AuthenticatedRoutes from "../routes/components/AuthenticatedRoutes";
 import { useOpen } from "../hooks";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       width: "100vw",
       height: "100vh",
-      background: "#000",
+      background: theme.palette.primary.dark,
       overflow: "auto",
     },
   })

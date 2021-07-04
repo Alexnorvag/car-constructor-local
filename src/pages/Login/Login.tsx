@@ -14,20 +14,27 @@ import {
   AuthContainerInputProps,
 } from "../../components/AuthContainer/state/types";
 import Route from "../../routes/types";
+import { makeStyles, Box } from "@material-ui/core";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import LoginForm from "../../components/LoginForm";
+import { SendIcon } from "../../assets/icons/SendIcon";
+import { UserAddIcon } from "../../assets/icons/UserAddIcon";
 
-// const useStyles = makeStyles({
-//   root: {
-//     background: "#000",
-//     minHeight: "100vh",
-//   },
-// });
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: theme.palette.primary.dark,
+    minHeight: "100vh",
+  },
+}));
 
 const footer = {
-  link: Route.ABOUT,
+  link: Route.FORGOT,
   linkText: "Forgot Password?",
 };
 
 export const Login: FC = () => {
+  const classes = useStyles();
   const {
     email,
     password,
@@ -62,11 +69,19 @@ export const Login: FC = () => {
   ];
 
   const buttons: AuthContainerButtonProps[] = [
-    { primary: true, id: "submit", type: "submit", text: "LOG IN" },
+    { link: Route.SIGNUP, icon: <UserAddIcon />, text: "sign up" },
+    {
+      primary: true,
+      id: "submit",
+      type: "submit",
+      icon: <SendIcon />,
+      text: "log in",
+    },
   ];
 
   const handleSubmit = useCallback(
     (e: FormEvent) => {
+      console.log("fqwkfpoqwkfopqwof");
       e.preventDefault();
       if (!email || !password) return;
 
@@ -82,25 +97,28 @@ export const Login: FC = () => {
   }, [reset]);
 
   return (
-    <AuthContainer
-      error={error}
-      loading={loading}
-      loadingText="Checking credentials"
-      footer={footer}
-      inputs={inputs}
-      buttons={buttons}
-      onSubmit={handleSubmit}
-      description={
-        <>
-          <span>Welcome back!</span>
-          <span>Log in to proceed to car-constructor</span>
-        </>
-      }
-    />
-    // <Box className={classes.root} display="flex" flexDirection="column">
-    //   <Header />
-    //   <LoginForm />
-    //   <Footer />
-    // </Box>
+    <>
+      <AuthContainer
+        error={error}
+        loading={loading}
+        loadingText="Checking credentials"
+        footer={footer}
+        inputs={inputs}
+        buttons={buttons}
+        onSubmit={handleSubmit}
+        inputSpacing={15}
+        description={
+          <>
+            <span>Welcome back!</span>
+            <span>Log in to proceed to car-constructor</span>
+          </>
+        }
+      />
+      {/* <Box className={classes.root} display="flex" flexDirection="column">
+        <Header />
+        <LoginForm />
+        <Footer />
+      </Box> */}
+    </>
   );
 };

@@ -1,6 +1,6 @@
-import { createStyles, makeStyles } from "@material-ui/core";
+import { createStyles, makeStyles, Box } from "@material-ui/core";
 import clsx from "clsx";
-import { FC } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "../../common/Button";
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) =>
     secondary: {
       width: "100%",
       background: "#99C2E5",
-      color: "#fff",
+      color:theme.palette.secondary.light,
       "&:hover": {
         background: "#324D66",
       },
@@ -42,32 +42,28 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AuthContainerFormButton: FC<AuthContainerButtonProps> = ({
-  primary,
-  id,
-  type,
-  text,
-  link,
-}) => {
-  const classes = useStyles();
+const AuthContainerFormButton = memo(
+  ({ primary, id, type, text, link }: AuthContainerButtonProps) => {
+    const classes = useStyles();
 
-  return (
-    <Button
-      size="small"
-      variant="contained"
-      primary={primary}
-      id={id}
-      type={type}
-      className={clsx(
-        classes.button,
-        primary ? classes.primary : classes.secondary
-      )}
-      component={link ? Link : undefined}
-      to={link ?? undefined}
-    >
-      {text}
-    </Button>
-  );
-};
+    return (
+      <Button
+        size="small"
+        variant="contained"
+        primary={primary}
+        id={id}
+        type={type}
+        className={clsx(
+          classes.button,
+          primary ? classes.primary : classes.secondary
+        )}
+        component={link ? Link : undefined}
+        to={link ?? undefined}
+      >
+        {text}
+      </Button>
+    );
+  }
+);
 
 export default AuthContainerFormButton;

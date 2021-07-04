@@ -1,15 +1,8 @@
-import { makeStyles, createStyles } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { FC } from "react";
+
 import { AuthContainerInputProps } from "../state/types";
 import AuthContainerInput from "./AuthContainerInput";
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    inputs: {
-      marginBottom: 30,
-    },
-  })
-);
 
 interface AuthContainerFormInputProps {
   inputs: AuthContainerInputProps[];
@@ -19,10 +12,8 @@ const AuthContainerFormInput: FC<AuthContainerFormInputProps> = ({
   inputs,
   spacing,
 }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.inputs}>
+    <Box>
       {inputs.map((inputProps) => (
         <AuthContainerInput
           key={inputProps.id}
@@ -30,7 +21,7 @@ const AuthContainerFormInput: FC<AuthContainerFormInputProps> = ({
           {...inputProps}
         />
       ))}
-    </div>
+    </Box>
   );
 };
 

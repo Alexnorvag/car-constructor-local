@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
         open ? "flex-start" : "center",
       padding: ({ isMobile }: StyleProps) =>
         isMobile ? "8px 4px" : "16px 20px 16px 24px",
-      color: "#000",
+      color: theme.palette.primary.dark,
       transition: theme.transitions.create("all"),
       textTransform: "uppercase",
       display: ({ isMobile }: StyleProps) =>
@@ -31,10 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: ({ isMobile }: StyleProps) => (isMobile ? "center" : "left"),
     },
     navListItemActive: {
-      color: "#fff",
+      color: theme.palette.secondary.light,
 
       "& svg": {
-        fill: "#fff",
+        fill: theme.palette.secondary.light,
       },
     },
   })

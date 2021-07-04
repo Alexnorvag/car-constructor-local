@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: APPBAR_HEIGHT,
       height: "auto",
       maxHeight: `calc(100% - ${APPBAR_HEIGHT}px)`,
-      background: "#929497",
+      background: theme.palette.primary.main,
       overflowX: "hidden",
       overflowY: "auto",
     },
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     navListItemAvatar: {
       width: 44,
-      color: "#000",
+      color: theme.palette.primary.dark,
       minWidth: "initial",
       display: "flex",
       alignItems: "center",
@@ -206,6 +206,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = ({ open }) => {
         className={classes.navList}
         component="nav"
         aria-label="application stack"
+        disablePadding
       >
         {pages.map((page) => (
           <LayoutSidebarItem
