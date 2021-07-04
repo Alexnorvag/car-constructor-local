@@ -12,7 +12,7 @@ const AuthContainerFormButtons = ({
   buttons,
 }: AuthContainerFormButtonsProps) => {
   return (
-    <Box display="flex" justifyContent="space-evenly">
+    <Box display="flex" justifyContent="space-evenly" flex='1'>
       {buttons.map((buttonProps) =>
         buttonProps.icon ? (
           <AuthContainerFormIconButton

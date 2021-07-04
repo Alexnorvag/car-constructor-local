@@ -12,7 +12,6 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 
 import Route from "../../routes/types";
-// import Footer from "../Footer";
 import {
   AuthContainerButtonProps,
   AuthContainerInputProps,
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       color: theme.palette.common.white,
       position: "relative",
-      border: "2px solid red",
       // background: "white",
       // borderRadius: 8,
       [theme.breakpoints.down(480)]: {
@@ -61,9 +59,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
+      gap: 5,
     },
     titleWrapper: {
       display: "flex",
+      gap: 10,
     },
     title: {
       fontSize: 30,
@@ -78,7 +78,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      marginBottom: 17,
       "& > span": {
         fontSize: 14,
         lineHeight: "19px",
@@ -104,7 +103,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     error: {
       height: 19,
-      marginTop: 10,
       color: theme.palette.error.dark,
       opacity: 0,
       transition: "opacity .1s ease",
@@ -153,6 +151,9 @@ const useStyles = makeStyles((theme: Theme) =>
       maxHeight: 275,
     },
     form: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 10,
       width: "100%",
     },
     hidden: {
